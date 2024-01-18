@@ -111,16 +111,22 @@ int animation_loop(t_vars *varg)
 {
     const int frame_delay = 100000;
 
+    // Redraw the background at the sprite's current and previous positions
     paintcanva(varg, &varg->person[1], varg->person[0].prev_sx, varg->person[0].prev_sy);
-    
+    if (varg->person[0].prev_sx != varg->person[0].curr_sx || varg->person[0].prev_sy != varg->person[0].curr_sy) {
+        paintcanva(varg, &varg->person[1], varg->person[0].curr_sx, varg->person[0].curr_sy);
+    }
+
+    // Draw the sprite at the new position
     paint_canvaw(varg, &varg->person[0]);
     update_sprite(&varg->person[0]);
+
     mlx_put_image_to_window(varg->mlx, varg->win, varg->canva.img, 0, 0);
    
     usleep(frame_delay);
    
     return (0);
-} 
+}
 
 int main()
 {
