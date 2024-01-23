@@ -6,37 +6,18 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:01:17 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/01/22 18:17:34 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/01/23 17:06:16 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 #include "fcntl.h"
 
-/* char	**read_map(int fd, int ctd)
+int	count_lines(int fd)
 {
-	char	*line;
-	char	**out;
-	char	*line;
-	int		ctd;
 	char	*line;
 	int		ctd;
 
-	line = get_next_line(fd);
-	if (line)
-		read_map(fd, ctd + 1);
-	else
-	{
-		out = malloc((ctd + 1) * sizeof(char *));
-		//protection
-		out[ctd] = 0;
-	}
-	if (line)
-		out[ctd] = line;
-} */
-//=======================================================
-int	count_lines(int fd)
-{
 	line = get_next_line(fd);
 	if (!line)
 		return (0);
@@ -114,7 +95,7 @@ t_map	read_map(const char *map_path)
 	smap.map = malloc((ln_ctd + 1) * sizeof(char *));
 	if (!smap.map)
 	{
-        close(fd);
+		close(fd);
 		return (smap);
 	}
 	smap.map[ln_ctd] = NULL;
@@ -128,15 +109,41 @@ t_map	read_map(const char *map_path)
 
 int	mapping(char *map_path, t_map *smap)
 {
-    int i;
+	int	i;
+
 	*smap = read_map(map_path);
-    if (!smap->map)
-    {
-        write(1, "Error reading Map", 17);
-        return (0);
-    }
+	if (!smap->map)
+	{
+		write(1, "Error reading Map", 17);
+		return (0);
+	}
 	i = validate_map(smap);
-    if (i == 0)
-        write(1, "Error\n", 1);
+	if (i == 0)
+		write(1, "Error\n", 1);
 	return (i);
 }
+
+/* char	**read_map(int fd, int ctd)
+{
+	char	*line;
+	char	**out;
+	char	*line;
+	int		ctd;
+	char	*line;
+	int		ctd;
+	char	*line;
+	int		ctd;
+
+	line = get_next_line(fd);
+	if (line)
+		read_map(fd, ctd + 1);
+	else
+	{
+		out = malloc((ctd + 1) * sizeof(char *));
+		//protection
+		out[ctd] = 0;
+	}
+	if (line)
+		out[ctd] = line;
+} */
+//=======================================================

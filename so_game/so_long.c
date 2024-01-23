@@ -238,7 +238,7 @@ int	main(void)
 	mlx_loop(varg.mlx);
 }
 
-/* 
+/*
     paintcanva(&varg, &varg.person[2], 0, 0);
     paintcanva(&varg, &varg.person[2], 64, 0);
     paintcanva(&varg, &varg.person[2], 128, 0);

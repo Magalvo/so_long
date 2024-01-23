@@ -29,19 +29,22 @@ typedef struct s_img
 	int		curr_frame;
 }			t_img;
 
-typedef struct s_map
-{
+typedef struct s_map {
 	int		width;
 	int		height;
-	char 	**map; //Array para guardar o layout do mapa
+	char	**map;
+	char	**cpymap;
 	int		player_x;
 	int		player_y;
 	int		exit_x;
 	int		exit_y;
 	int		enemy_x;
 	int		enemy_y;
-	int 	collectibles; //Numero de collectibles
-}			t_map;
+	int		collectibles;
+	int		collectibles_found;
+	int		exit_found;
+} t_map;
+
 
 typedef struct s_vars
 {
@@ -70,4 +73,5 @@ void		paint_canvaw(t_vars *varg, t_img *img);
 int			map_main(int argc[], char *argv);
 int			name_check(char *pathname);
 int			mapping(char *map, t_map *smap);
+int			validate_map(t_map *smap);
 #endif
