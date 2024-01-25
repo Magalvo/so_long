@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_main.c                                         :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 14:03:04 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/01/23 17:08:52 by dde-maga         ###   ########.fr       */
+/*   Created: 2023/10/02 14:55:45 by dde-maga          #+#    #+#             */
+/*   Updated: 2023/10/11 16:40:09 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "libft.h"
 
-int	map_main(int argc[], char *argv)
+int	ft_isdigit(int c)
 {
-	int		j;
-	t_vars	vars;
-
-	j = name_check(argv[1]);
-	if (j == 4)
-		mapping(argv[1], &vars.game);
-	else
-		write(1, "Error", 5);
-	if (j == 0)
-		return (0);
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

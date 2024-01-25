@@ -1,9 +1,17 @@
 NAME = so_long
-BONUS_NAME = so_long_bonus
-SRCS = $(addprefix $(SRCS_DIR)/,$(addsuffix .c, $(S)))
-S = map_main name_check read_map
-OBJS = (SRCS:.c=.o)
+SRCS = main.c so_long.c
+OBJS = $(SRCS:.c=.o)
+
+D_SRCS = $(addprefix $(SRCS_DIR)/,$(addsuffix .c, $(D)))
+D = aux_func draw images map_draw sprites
+DRAW_DIR = draw
+D_OBJS = $(D_SRCS:.c=.o)
+
+S_SRCS = $(addprefix $(SRCS_DIR)/,$(addsuffix .c, $(S)))
+S = flood_fill read_map map_check
 SRCS_DIR = maps
+S_OBJS = $(S_SRCS:.c=.o)
+
 CC = cc
 CFLAGS = -g -Wall -Wextra -Werror
 
@@ -18,7 +26,7 @@ all: $(NAME)
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
-$(NAME): $(LIBFT) $(OBJS) $(MLX)
+$(NAME): $(LIBFT) $(SRCS) $(S_OBJS) $(D_OBJS) $(MLX)
 	@$(CC) -o $(NAME) $(MLX) $(OBJS) $(LIBFT)
 
 $(LIBFT):

@@ -45,6 +45,13 @@ typedef struct s_map {
 	int		exit_found;
 } t_map;
 
+typedef struct s_assets {
+    t_img img;            // Image data, likely including a pointer to the image and other properties.
+    char *relative_path;  // The file path relative to the program's directory, used to load the image.
+    int img_width;        // The width of the image.
+    int img_height;       // The height of the image.
+} t_assets;
+
 
 typedef struct s_vars
 {
@@ -65,13 +72,19 @@ typedef struct s_vars
 void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
 int			my_mlx_pixel_get(t_img *data, int x, int y);
 t_img		load_img(char *path, t_vars *varg);
-void		loadallimg(t_vars *vars);
 
 //void paint_canvaw(t_vars *varg, t_img *img, float w, float h);
 void		paintcanva(t_vars *varg, t_img *img, int sx, int sy);
 void		paint_canvaw(t_vars *varg, t_img *img);
-int			map_main(int argc[], char *argv);
 int			name_check(char *pathname);
 int			mapping(char *map, t_map *smap);
 int			validate_map(t_map *smap);
+void    	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+void		*ft_memcpy(void *dest, const void *src, size_t n);
+void		loadallimg(t_vars *vars);
+void		update_sprite(t_img *img);
+int			animation_loop(t_vars *varg);
+int			draw_borders(t_map smapi, t_vars *vars);
+int			draw_window(t_map smapi, t_vars *vars);
+int			ft_strlen(const char *str);
 #endif
