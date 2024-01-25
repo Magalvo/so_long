@@ -1,5 +1,5 @@
 NAME = so_long
-SRCS = main.c so_long.c
+SRCS = main.c
 OBJS = $(SRCS:.c=.o)
 
 D_SRCS = $(addprefix $(SRCS_DIR)/,$(addsuffix .c, $(D)))
@@ -15,11 +15,14 @@ S_OBJS = $(S_SRCS:.c=.o)
 CC = cc
 CFLAGS = -g -Wall -Wextra -Werror
 
-MLX = $(MLX_DIR)/libmlx_Linux.a -lX11 -lXext 
+MLX = $(MLX_DIR)/libmlx_Linux.a -lX11 -lXext
 MLX_DIR = minilibx-linux
 
-LIBFTDIR = ./libft
+LIBFTDIR = ./lib
 LIBFT = $(LIBFTDIR)/libft.a
+
+PRINTFDIR = ./custom/ft_printf
+PRINTF = $(PRINTFDIR)/libftprintf.a
 
 all: $(NAME)
 
@@ -27,10 +30,13 @@ all: $(NAME)
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 $(NAME): $(LIBFT) $(SRCS) $(S_OBJS) $(D_OBJS) $(MLX)
-	@$(CC) -o $(NAME) $(MLX) $(OBJS) $(LIBFT)
+	@$(CC) -o $(NAME) $(MLX) $(OBJS) $(LIBFT) $(PRINTF)
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFTDIR) --no-print-directory
+
+$(PRINTF):
+	@$(MAKE) -C $(PRINTFDIR) --no-print-directory
 
 $(MLX):
 	$(MAKE) -C $(MLX_DIR)
@@ -41,7 +47,7 @@ clean:
 	@$(MAKE) -C $(MLX_DIR) clean --no-print-directory
 
 fclean: clean
-	@$(RM) $(NAME) $(BONUS_NAME) 
+	@$(RM) $(NAME) $(BONUS_NAME)
 	@$(MAKE) -C $(LIBFTDIR) fclean --no-print-directory
 
 re: fclean all

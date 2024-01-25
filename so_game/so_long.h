@@ -79,7 +79,7 @@ void		paint_canvaw(t_vars *varg, t_img *img);
 int			name_check(char *pathname);
 int			mapping(char *map, t_map *smap);
 int			validate_map(t_map *smap);
-void    	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+void		*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 void		loadallimg(t_vars *vars);
 void		update_sprite(t_img *img);
@@ -87,4 +87,5 @@ int			animation_loop(t_vars *varg);
 int			draw_borders(t_map smapi, t_vars *vars);
 int			draw_window(t_map smapi, t_vars *vars);
 int			ft_strlen(const char *str);
+void		read_map_lines(int fd, t_map *smap, int *ln_ctd);
 #endif

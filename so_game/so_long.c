@@ -1,56 +1,5 @@
 #include "so_long.h"
 
-
-
-
-
-
-int	key_hook(int keycode, t_vars *vars)
-{
-	vars->person[0].prev_sx = vars->person[0].curr_sx;
-	vars->person[0].prev_sy = vars->person[0].curr_sy;
-	if (keycode == XK_Escape)
-	{
-		mlx_destroy_window(vars->mlx, vars->win);
-		mlx_destroy_display(vars->mlx);
-		free(vars->mlx);
-		exit(0);
-	}
-	else if (keycode == XK_w && vars->person[0].curr_sy > 0)
-	{
-		vars->move_y -= 64;
-		ft_printf("curr_sy: %d\n", vars->person[0].curr_sy);
-		ft_printf("curr_sx: %d\n", vars->person[0].curr_sx);
-	}
-	else if (keycode == XK_s && vars->person[0].curr_sy < 576)
-	{
-		vars->move_y += 64;
-		ft_printf("curr_sy: %d\n", vars->person[0].curr_sy);
-		ft_printf("curr_sx: %d\n", vars->person[0].curr_sx);
-	}
-	else if (keycode == XK_a && vars->person[0].curr_sx > 0)
-	{
-		vars->move_x -= 64;
-		ft_printf("curr_sx: %d\n", vars->person[0].curr_sx);
-		ft_printf("curr_sy: %d\n", vars->person[0].curr_sy);
-	}
-	else if (keycode == XK_d && vars->person[0].curr_sx < 576)
-	{
-		vars->move_x += 64;
-		ft_printf("curr_sx: %d\n", vars->person[0].curr_sx);
-		ft_printf("curr_sy: %d\n", vars->person[0].curr_sy);
-	}
-	//ft_printf("keycode: %d\n", keycode);
-	return (0);
-}
-
-
-
-
-
-
-
-
 int	main(void)
 {
 	t_vars	varg;

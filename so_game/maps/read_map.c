@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:01:17 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/01/24 15:57:42 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:31:04 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ t_map	read_map(const char *map_path)
 void	read_map_lines(int fd, t_map *smap, int *ln_ctd)
 {
 	char *line;
-	
+
 	*ln_ctd = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		if (*ln_ctd == 0)
 			smap->width = ft_strlen(line);
-		smap->map = (char **)ft_reallloc(smap->map, (*ln_ctd) * sizeof(char *),
+		smap->map = (char **)ft_realloc(smap->map, (*ln_ctd) * sizeof(char *),
 				(*ln_ctd + 1) * sizeof(char *));
 		smap->map[*ln_ctd] = line;
 		(*ln_ctd)++;
@@ -148,27 +148,17 @@ t_map	read_map(const char *map_path)
 
 
 
- char	**read_map(int fd, int ctd)
+ char	**read_map(int fd, int ctd, char **out)
 {
 	char	*line;
-	char	**out;
-	char	*line;
-	int		ctd;
-	char	*line;
-	int		ctd;
-	char	*line;
-	int		ctd;
 
 	line = get_next_line(fd);
 	if (line)
-		read_map(fd, ctd + 1);
-	else
-	{
+		out = read_map(fd, ctd + 1, out);
+	else if (ctd)
 		out = malloc((ctd + 1) * sizeof(char *));
-		//protection
-		out[ctd] = 0;
-	}
-	if (line)
+	if (out)
 		out[ctd] = line;
+	return (out);
 } */
 //=======================================================
