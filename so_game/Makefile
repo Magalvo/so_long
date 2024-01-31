@@ -1,53 +1,40 @@
 NAME = so_long
-SRCS = main.c
-OBJS = $(SRCS:.c=.o)
 
-D_SRCS = $(addprefix $(SRCS_DIR)/,$(addsuffix .c, $(D)))
-D = aux_func draw images map_draw sprites
-DRAW_DIR = draw
-D_OBJS = $(D_SRCS:.c=.o)
+SRC_PRINTF = aux_print.c ft_printf.c
+SRC_GNL = get_next_line_bonus.c get_next_line_utils_bonus.c
+SRC_DRAW = aux_func.c draw.c images.c map_draw.c sprites.c
+SRC_MAPS = flood_fill.c map_check.c read_map.c
+SRC_LIBFT = ft_putstr_fd.c ft_strlen.c ft_memmove.c ft_putchar_fd.c
 
-S_SRCS = $(addprefix $(SRCS_DIR)/,$(addsuffix .c, $(S)))
-S = flood_fill read_map map_check
-SRCS_DIR = maps
-S_OBJS = $(S_SRCS:.c=.o)
+SRC =	$(addprefix ./srcs/lib/, $(SRC_LIBFT)) \
+		$(addprefix ./srcs/custom/get_next_line/, $(SRC_GNL)) \
+		$(addprefix ./srcs/custom/ft_printf/, $(SRC_PRINTF)) \
+		$(addprefix ./srcs/draw/, $(SRC_DRAW)) \
+		$(addprefix ./srcs/maps/, $(SRC_MAPS)) \
 
-CC = cc
-CFLAGS = -g -Wall -Wextra -Werror
 
-MLX = $(MLX_DIR)/libmlx_Linux.a -lX11 -lXext
-MLX_DIR = minilibx-linux
+SRCOBJ = obj/
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+LIBFLAGS = -lXext -lX11
+LIB = minilibx-linux/libmlx_Linux.a
+OBJ = $(addprefix $(SRCOBJ), $(SRC:./srcs/%.c=%.o))
 
-LIBFTDIR = ./lib
-LIBFT = $(LIBFTDIR)/libft.a
-
-PRINTFDIR = ./custom/ft_printf
-PRINTF = $(PRINTFDIR)/libftprintf.a
 
 all: $(NAME)
 
-.c.o:
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+$(NAME): $(OBJ)
+	@${CC} ${CFLAGS} -g main.c ${OBJ} ${LIB} ${LIBFLAGS} -o $(NAME)
 
-$(NAME): $(LIBFT) $(SRCS) $(S_OBJS) $(D_OBJS) $(MLX)
-	@$(CC) -o $(NAME) $(MLX) $(OBJS) $(LIBFT) $(PRINTF)
-
-$(LIBFT):
-	@$(MAKE) -C $(LIBFTDIR) --no-print-directory
-
-$(PRINTF):
-	@$(MAKE) -C $(PRINTFDIR) --no-print-directory
-
-$(MLX):
-	$(MAKE) -C $(MLX_DIR)
+$(SRCOBJ)%.o: srcs/%.c
+	@mkdir -p $(SRCOBJ)
+	@mkdir -p $(dir $@)
+	@${CC} ${CFLAGS} -c $< -o $@
 
 clean:
-	@$(RM) $(OBJS)
-	@$(MAKE) -C $(LIBFTDIR) clean --no-print-directory
-	@$(MAKE) -C $(MLX_DIR) clean --no-print-directory
+	@rm -rf $(SRCOBJ)
 
 fclean: clean
-	@$(RM) $(NAME) $(BONUS_NAME)
-	@$(MAKE) -C $(LIBFTDIR) fclean --no-print-directory
+	@rm -rf $(NAME)
 
 re: fclean all

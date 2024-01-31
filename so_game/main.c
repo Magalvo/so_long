@@ -1,4 +1,4 @@
-#include "so_long.h"
+#include "./headers/so_long.h"
 
 int	key_hook(int keycode, t_vars *vars)
 {
