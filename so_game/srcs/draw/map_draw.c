@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:31:24 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/01/31 17:10:53 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:29:51 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void    char_map(char map, t_vars *vars, int sx, int sy)
     else if (map == '1')
         paintcanva(vars, &vars->person[2], sx, sy);
     else
-        write(1, "Invalid Map Format", 18);
+        write(1, "Invalid Map Format(char map)", 28);
 }
 
 int draw_borders(t_map smapi, t_vars *vars)

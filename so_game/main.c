@@ -1,5 +1,5 @@
 #include "./headers/so_long.h"
-
+#include <stdio.h>
 int	key_hook(int keycode, t_vars *vars)
 {
 	vars->person[0].prev_sx = vars->person[0].curr_sx;
@@ -51,12 +51,13 @@ int main(int argc, char **argv)
     if (argc == 2)
     {
         j = name_check(argv[1]);
+		printf("OK 1 %d\n", j);
         if (j == 4)
             j = mapping(argv[1], &vars.game);
         if (j == 0)
-            write(1, "Invalid Map Format", 18);
+            write(1, "Invalid Map Format(main)\n", 25);
         if (draw_window(vars.game, &vars) == 0)
-            write(1, "Error drawing window", 21);
+            write(1, "Error drawing window\n", 22);
         draw_borders(vars.game, &vars);
         mlx_put_image_to_window(vars.mlx, vars.win, vars.canva.img, 0, 0);
         mlx_key_hook(vars.win, key_hook, &vars);

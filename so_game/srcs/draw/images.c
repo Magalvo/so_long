@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:11:11 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/01/31 17:13:08 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:19:12 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_img	load_img(char *path, t_vars *varg)
 			&img.img_height);
 	if (!img.img)
 	{
-		printf("Error\n");
+		printf("Error on image conv\n");
 		exit(1);
 	}
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,

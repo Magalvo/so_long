@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:44:47 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/01/31 17:11:52 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:30:19 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	name_check(char *pathname)
 	i = ft_strlen(pathname);
 	if (i <= 4)
 	{
-		write(1, "Invalid Map Format", 18);
+		write(1, "Invalid Map Format(map_check)", 29);
 		return (0);
 	}
 	if (pathname[i - 1] == 'r')
@@ -31,9 +31,10 @@ int	name_check(char *pathname)
 		j += 1;
 	if (pathname[i - 3] == 'b')
 		j += 1;
-	if (pathname[i - 3] == '.')
-		if (j == 0)
-			write(1, "Invalid Map Format", 18);
+	if (pathname[i - 4] == '.')
+		j += 1;
+	if (j == 0)
+		write(1, "Invalid Map Format(sec check)", 29);
 	return (j);
 }
 

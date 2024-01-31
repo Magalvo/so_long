@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"*.jsx": "javascriptreact",
-		"libft.h": "c"
+		"libft.h": "c",
+		"so_long.h": "c"
 	}
 }
