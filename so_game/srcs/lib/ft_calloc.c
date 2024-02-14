@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 11:35:52 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/14 17:44:43 by dde-maga         ###   ########.fr       */
+/*   Created: 2024/02/14 17:32:38 by dde-maga          #+#    #+#             */
+/*   Updated: 2024/02/14 17:46:53 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
+#include "libft.h"
 
-size_t				ft_strlen(const char *s);
-int					ft_putchar_fd(char c, int fd);
-int					ft_putstr_fd(char *s, int fd);
-void				*ft_memset(void *b, int c, size_t len);
-void				*ft_calloc(size_t nmemb, size_t size);
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*out;
 
-#endif
+	out = malloc(nmemb * size);
+	if (out == NULL)
+		return (NULL);
+	if (nmemb == 0 || size == 0)
+		return (out);
+	ft_memset(out, 0, nmemb * size);
+	return (out);
+}

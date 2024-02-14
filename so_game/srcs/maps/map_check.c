@@ -6,12 +6,13 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:44:47 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/14 16:17:31 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/14 17:13:49 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/so_long.h"
 #include <unistd.h>
+
 int	name_check(char *pathname)
 {
 	int	j;
@@ -21,10 +22,7 @@ int	name_check(char *pathname)
 	j = 0;
 	i = ft_strlen(pathname);
 	if (i <= 4)
-	{
-		write(1, "Invalid Map Format(map_check)", 29);
-		return (0);
-	}
+		return (!write(1, "Invalid Map Format(map_check)", 29));
 	if (pathname[i - 1] == 'r')
 		j = 1;
 	if (pathname[i - 2] == 'e')

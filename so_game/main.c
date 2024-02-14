@@ -6,57 +6,18 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 10:30:35 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/14 16:08:34 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/14 17:21:51 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./headers/so_long.h"
 
-int	key_hook(int keycode, t_vars *vars)
-{
-	vars->person[0].prev_sx = vars->person[0].curr_sx;
-	vars->person[0].prev_sy = vars->person[0].curr_sy;
-	if (keycode == XK_Escape)
-	{
-		mlx_destroy_window(vars->mlx, vars->win);
-		mlx_destroy_display(vars->mlx);
-		free(vars->mlx);
-		exit(0);
-	}
-	else if (keycode == XK_w && vars->person[0].curr_sy > 0)
-	{
-		vars->move_y -= 64;
-		ft_printf("curr_sy: %d\n", vars->person[0].curr_sy);
-		ft_printf("curr_sx: %d\n", vars->person[0].curr_sx);
-	}
-	else if (keycode == XK_s && vars->person[0].curr_sy < vars->game.height)
-	{
-		vars->move_y += 64;
-		ft_printf("curr_sy: %d\n", vars->person[0].curr_sy);
-		ft_printf("curr_sx: %d\n", vars->person[0].curr_sx);
-	}
-	else if (keycode == XK_a && vars->person[0].curr_sx > 0)
-	{
-		vars->move_x -= 64;
-		ft_printf("curr_sx: %d\n", vars->person[0].curr_sx);
-		ft_printf("curr_sy: %d\n", vars->person[0].curr_sy);
-	}
-	else if (keycode == XK_d && vars->person[0].curr_sx < vars->game.width)
-	{
-		vars->move_x += 64;
-		ft_printf("curr_sx: %d\n", vars->person[0].curr_sx);
-		ft_printf("curr_sy: %d\n", vars->person[0].curr_sy);
-	}
-	//ft_printf("keycode: %d\n", keycode);
-	return (0);
-}
-
 
 int main(int argc, char **argv)
 {
     int j;
-    t_vars vars;
-	//vars.mlx = mlx_init();
+    static t_vars vars;
+	
     j = 0;
     if (argc != 2)
 	{
@@ -66,21 +27,21 @@ int main(int argc, char **argv)
     else
     {
         j = name_check(argv[1]);
-		ft_printf("Name Check (J): %d\n", j);
+
         if (j == 4)
             j = mapping(argv[1], &vars.game);
         if (j == 0)
             write(1, "Invalid Map Format(main)\n", 25);
-        if (draw_window(vars.game, &vars) == 0)
-		{
-			write(1, "Falha ao alocar memoria no jogo\n", 32);
-			return (0);
-		}
-        draw_borders(vars.game, &vars);
-        mlx_put_image_to_window(vars.mlx, vars.win, vars.canva.img, 0, 0);
-    	mlx_key_hook(vars.win, key_hook, &vars);
-        mlx_loop_hook(vars.mlx, animation_loop, &vars);
-        mlx_loop(vars.mlx);
+        // if (draw_window(vars.game, &vars) == 0)
+		// {
+		// 	write(1, "Falha ao alocar memoria no jogo\n", 32);
+		// 	return (0);
+		// }
+        // draw_borders(vars.game, &vars);
+        // mlx_put_image_to_window(vars.mlx, vars.win, vars.canva.img, 0, 0);
+    	// mlx_key_hook(vars.win, key_hook, &vars);
+        // mlx_loop_hook(vars.mlx, animation_loop, &vars);
+        // mlx_loop(vars.mlx);
         return (0);
     }
 }

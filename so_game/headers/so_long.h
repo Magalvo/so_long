@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:23:32 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/14 11:52:47 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/14 17:31:58 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define SO_LONG_H
 
 #include "macros.h"
+
+typedef struct	s_object  t_object;
+
 
 typedef struct	s_img
 {
@@ -40,6 +43,16 @@ typedef struct	s_colectible
 	int x;
 	int y;
 }				t_colectible;
+
+
+struct	s_object
+{
+	int			x;
+	int			y;
+	t_img		*imgs;
+	void		(*render)(t_object *this);
+	t_object	*next;
+};
 
 typedef struct	s_map {
 	int		width;
@@ -68,18 +81,12 @@ typedef struct	s_assets {
 
 typedef struct	s_vars
 {
-	void	*mlx;
-	void	*win;
-	int		keypress;
-	int		keycode;
-	int		action;
-	int		move_x;
-	int		move_y;
-	t_map	game;
-	t_img	*person;
-	t_img	img;
-	t_img	canva;
-	t_img	walls;
+	void		*mlx;
+	void		*win;
+	t_object 	*objects;
+	t_object 	*player;
+	t_map		game;
+	t_img		canva;
 }				t_vars;
 
 void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
