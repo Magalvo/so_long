@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:11:11 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/14 17:29:10 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/14 17:51:40 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_img	load_img(char *path, t_vars *varg)
 	img.relative_path = path;
 	img.img = mlx_xpm_file_to_image(varg->mlx, img.relative_path, &img.img_width,
 			&img.img_height);
-
  	if (!img.img)
 	{
 		printf("Error on image conv\n");
@@ -42,13 +41,13 @@ t_img	load_img(char *path, t_vars *varg)
 
 void	loadallimg(t_vars *vars)
 {
-	vars->person = malloc(sizeof(t_img) * 5);
-	if(!vars->person)
-		return ;
-	vars->person[0] = load_img("img/char/Idle64.xpm", vars);
-	vars->person[1] = load_img("img/char/Pavement.xpm", vars);
-	vars->person[2] = load_img("img/char/Grass64.xpm", vars);
-	vars->person[3] = load_img("img/char/ChickenLit.xpm", vars);
-	//vars->person[4] = load_img("img/char/Lion.xpm", vars);
-	vars->person[4] = load_img("img/char/hole.xpm", vars);
+	// vars->person = ft_calloc(sizeof(t_img), 5);
+	// if(!vars->person)
+	// 	return ;
+	// vars->person[0] = load_img("img/char/Idle64.xpm", vars);
+	// vars->person[1] = load_img("img/char/Pavement.xpm", vars);
+	// vars->person[2] = load_img("img/char/Grass64.xpm", vars);
+	// vars->person[3] = load_img("img/char/ChickenLit.xpm", vars);
+	// //vars->person[4] = load_img("img/char/Lion.xpm", vars);
+	// vars->person[4] = load_img("img/char/hole.xpm", vars);
 }

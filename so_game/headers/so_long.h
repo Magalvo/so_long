@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:23:32 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/14 17:31:58 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:08:18 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,6 @@ typedef struct	s_img
 	int		curr_frame;
 }				t_img;
 
-typedef struct	s_colectible
-{
-	int x;
-	int y;
-}				t_colectible;
-
-
 struct	s_object
 {
 	int			x;
@@ -59,24 +52,10 @@ typedef struct	s_map {
 	int		height;
 	char	**map;
 	char	**cpymap;
-	int		player_x;
-	int		player_y;
-	int		exit_x;
-	int		exit_y;
-	int		enemy_x;
-	int		enemy_y;
-	t_colectible *colectible;
 	int		collectibles_count;
 	int		collectibles_found;
 	int		exit_found;
 }				t_map;
-
-typedef struct	s_assets {
-    t_img img;            // Image data, likely including a pointer to the image and other properties.
-    char *relative_path;  // The file path relative to the program's directory, used to load the image.
-    int img_width;        // The width of the image.
-    int img_height;       // The height of the image.
-}				t_assets;
 
 
 typedef struct	s_vars
@@ -99,8 +78,6 @@ void		paint_canvaw(t_vars *varg, t_img *img);
 int			name_check(char *pathname);
 int			mapping(char *map, t_map *smap);
 int			validate_map(t_map *smap);
-void		*ft_realloc(void *ptr, size_t old_size, size_t new_size);
-void		*ft_memcpy(void *dest, const void *src, size_t n);
 void		loadallimg(t_vars *vars);
 void		update_sprite(t_img *img);
 int			animation_loop(t_vars *varg);

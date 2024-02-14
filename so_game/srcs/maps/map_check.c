@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:44:47 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/14 17:13:49 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:11:04 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,39 +60,39 @@ int	validate_borders(t_map *smap)
 	return (1);
 }
 
-void	assign_positions(t_map *smap)
-{
-	int x;
-	int y;
-	char tile;
+// void	load_map_objects(t_map *smap)
+// {
+// 	int x;
+// 	int y;
+// 	char tile;
 
-	y = 0;
-	while (y < smap->height)
-	{
-		x=0;
-		while (x < smap->width)
-		{
-			tile = smap->map[y][x];
-			if (tile == 'P')
-			{
-				smap->player_x = x;
-				smap->player_y = y;
-			}
-			if (tile == 'E')
-			{
-				smap->exit_x = x;
-				smap->exit_y = y;
-			}
-			if(tile == 'X')
-			{
-				smap->enemy_x = x;
-				smap->enemy_y = y;
- 			}
-			x++;
-		}
-		y++;
-	}
-}
+// 	y = 0;
+// 	while (y < smap->height)
+// 	{
+// 		x=0;
+// 		while (x < smap->width)
+// 		{
+// 			tile = smap->map[y][x];
+// 			// if (tile == 'P')
+// 			// {
+// 			// 	smap->player_x = x;
+// 			// 	smap->player_y = y;
+// 			// }
+// 			// if (tile == 'E')
+// 			// {
+// 			// 	smap->exit_x = x;
+// 			// 	smap->exit_y = y;
+// 			// }
+// 			// if(tile == 'X')
+// 			// {
+// 			// 	smap->enemy_x = x;
+// 			// 	smap->enemy_y = y;
+//  			// }
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
 
 int switch_char(t_map *smap, int *players, int *exits, int *collectibles)
 {
@@ -123,22 +123,21 @@ int switch_char(t_map *smap, int *players, int *exits, int *collectibles)
 	return(1);
 }
 
-int	validate_map(t_map *smap)
+int	validate_map(t_map *map)
 {
 	int players;
 	int exits;
 	int collectibles;
 
-	if (!validate_borders(smap))
+	if (!validate_borders(map))
 	{
 		printf("Error on validate Map/Borders\n");
 		return (0);
 	}
-
 	printf("Valid Borders\n");
-	switch_char(smap, &players, &exits, &collectibles);
+	switch_char(map, &players, &exits, &collectibles);
 	if (players != 1 || exits != 1 || collectibles <= 0)
 		return (0);
-	assign_positions(smap);
+	// assign_positions(map);
 	return (1);
 }
