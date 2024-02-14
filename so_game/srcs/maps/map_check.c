@@ -6,12 +6,12 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:44:47 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/01/31 18:30:19 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/14 16:17:31 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/so_long.h"
-
+#include <unistd.h>
 int	name_check(char *pathname)
 {
 	int	j;
@@ -44,6 +44,8 @@ int	validate_borders(t_map *smap)
 	int	y;
 
 	x = 0;
+	printf("Width %d\n", smap->width);
+	printf("Height %d\n", smap->height);
 	while (x < smap->width)
 	{
 		if (smap->map[0][x] != '1' || smap->map[smap->height - 1][x] != '1')
@@ -53,7 +55,7 @@ int	validate_borders(t_map *smap)
 	y = 0;
 	while (y < smap->height)
 	{
-		if (smap->map[y][0] != '1' || smap->map[y][smap->width - 1])
+		if (smap->map[y][0] != '1' || smap->map[y][smap->width - 1] != '1')
 			return (0);
 		y++;
 	}
@@ -83,6 +85,11 @@ void	assign_positions(t_map *smap)
 				smap->exit_x = x;
 				smap->exit_y = y;
 			}
+			if(tile == 'X')
+			{
+				smap->enemy_x = x;
+				smap->enemy_y = y;
+ 			}
 			x++;
 		}
 		y++;
@@ -109,7 +116,7 @@ int switch_char(t_map *smap, int *players, int *exits, int *collectibles)
 				(*players)++;
 			if (tile == 'E')
 				(*exits)++;
-			if (tile == 'c')
+			if (tile == 'C')
 				(*collectibles)++;
 			x++;
 		}
@@ -125,9 +132,14 @@ int	validate_map(t_map *smap)
 	int collectibles;
 
 	if (!validate_borders(smap))
+	{
+		printf("Error on validate Map/Borders\n");
 		return (0);
+	}
+
+	printf("Valid Borders\n");
 	switch_char(smap, &players, &exits, &collectibles);
-	if (players != 1 || exits != 1 || collectibles < 0)
+	if (players != 1 || exits != 1 || collectibles <= 0)
 		return (0);
 	assign_positions(smap);
 	return (1);

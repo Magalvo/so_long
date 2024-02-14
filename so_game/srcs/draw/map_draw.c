@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:31:24 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/01/31 18:29:51 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:50:54 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void    char_map(char map, t_vars *vars, int sx, int sy)
 {
-    if (map == '0' || map == 'C' || map == 'P')
-        paintcanva(vars, &vars->person[1], sx, sy);
+    if (map == '0')
+        paintcanva(vars, &vars->person[1], sx * 64, sy* 64);
     else if (map == 'C')
-        paintcanva(vars, &vars->person[3], sx, sy);
+        paintcanva(vars, &vars->person[3], sx * 64, sy* 64);
     else if (map == 'E')
-        paintcanva(vars, &vars->person[2], sx, sy);
+        paintcanva(vars, &vars->person[4], sx * 64, sy* 64);
     else if (map == 'P')
-        paintcanva(vars, &vars->person[0], sx, sy);
+        paintcanva(vars, &vars->person[0], sx * 64, sy* 64);
     else if (map == '1')
-        paintcanva(vars, &vars->person[2], sx, sy);
+        paintcanva(vars, &vars->person[2], sx * 64, sy* 64);
     else
         write(1, "Invalid Map Format(char map)", 28);
 }
@@ -39,7 +39,7 @@ int draw_borders(t_map smapi, t_vars *vars)
         x = 0;
         while (x < smapi.width)
         {
-            char_map(smapi.map[y][x], vars, x * 64, y * 64);
+            char_map(smapi.map[y][x], vars, x, y);
             x++;
         }
         y++;
@@ -50,9 +50,13 @@ int draw_borders(t_map smapi, t_vars *vars)
 int draw_window(t_map smapi, t_vars *vars)
 {
     vars->mlx = mlx_init();
-    vars->win = mlx_new_window(vars->mlx, smapi.width * 64, smapi.height * 64, "so_long");
-    vars->canva.img = mlx_new_image(vars->mlx, smapi.width * 64, smapi.height * 64);
-    vars->canva.addr = mlx_get_data_addr(vars->canva.img, &vars->canva.bits_per_pixel, &vars->canva.line_length, &vars->canva.endian);
+    printf("smapi.widht: %d\n", smapi.width);
+    vars->win = mlx_new_window(vars->mlx, (smapi.width * 64), (smapi.height * 64), "so_long");
+    vars->canva.img = mlx_new_image(vars->mlx, (smapi.width * 64), (smapi.height * 64));
+    vars->canva.addr = mlx_get_data_addr(vars->canva.img,
+                    &vars->canva.bits_per_pixel,
+                    &vars->canva.line_length,
+                    &vars->canva.endian);
     loadallimg(vars);
     return(1);
 }

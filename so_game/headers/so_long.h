@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:23:32 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/01/31 16:23:35 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/14 11:52:47 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "macros.h"
 
-typedef struct s_img
+typedef struct	s_img
 {
 	void	*img;
 	char	*addr;
@@ -33,9 +33,15 @@ typedef struct s_img
 	int		prev_sy;
 	int		total_frames;
 	int		curr_frame;
-}			t_img;
+}				t_img;
 
-typedef struct s_map {
+typedef struct	s_colectible
+{
+	int x;
+	int y;
+}				t_colectible;
+
+typedef struct	s_map {
 	int		width;
 	int		height;
 	char	**map;
@@ -46,20 +52,21 @@ typedef struct s_map {
 	int		exit_y;
 	int		enemy_x;
 	int		enemy_y;
-	int		collectibles;
+	t_colectible *colectible;
+	int		collectibles_count;
 	int		collectibles_found;
 	int		exit_found;
-} t_map;
+}				t_map;
 
-typedef struct s_assets {
+typedef struct	s_assets {
     t_img img;            // Image data, likely including a pointer to the image and other properties.
     char *relative_path;  // The file path relative to the program's directory, used to load the image.
     int img_width;        // The width of the image.
     int img_height;       // The height of the image.
-} t_assets;
+}				t_assets;
 
 
-typedef struct s_vars
+typedef struct	s_vars
 {
 	void	*mlx;
 	void	*win;
@@ -73,7 +80,7 @@ typedef struct s_vars
 	t_img	img;
 	t_img	canva;
 	t_img	walls;
-}			t_vars;
+}				t_vars;
 
 void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
 int			my_mlx_pixel_get(t_img *data, int x, int y);
@@ -93,4 +100,6 @@ int			animation_loop(t_vars *varg);
 int			draw_borders(t_map smapi, t_vars *vars);
 int			draw_window(t_map smapi, t_vars *vars);
 void		read_map_lines(int fd, t_map *smap, int *ln_ctd);
+
+
 #endif

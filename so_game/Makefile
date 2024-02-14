@@ -24,7 +24,7 @@ OBJ = $(addprefix $(SRCOBJ), $(SRC:./srcs/%.c=%.o))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@${CC} ${CFLAGS} -g main.c ${OBJ} ${LIB} ${LIBFLAGS} -o $(NAME)
+	@${CC} ${CFLAGS} -g3 main.c ${OBJ} ${LIB} ${LIBFLAGS} -o $(NAME)
 
 $(SRCOBJ)%.o: srcs/%.c
 	@mkdir -p $(SRCOBJ)
