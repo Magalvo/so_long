@@ -5,12 +5,12 @@ SRC_GNL = get_next_line_bonus.c get_next_line_utils_bonus.c
 SRC_DRAW = aux_func.c draw.c images.c map_draw.c sprites.c
 SRC_MAPS = flood_fill.c map_check.c read_map.c
 SRC_LIBFT = ft_putstr_fd.c ft_strlen.c ft_putchar_fd.c ft_memset.c \
-			ft_calloc.c
+			ft_calloc.c ft_strdup.c
 
 SRC =	$(addprefix ./srcs/lib/, $(SRC_LIBFT)) \
 		$(addprefix ./srcs/custom/get_next_line/, $(SRC_GNL)) \
 		$(addprefix ./srcs/custom/ft_printf/, $(SRC_PRINTF)) \
-		$(addprefix ./srcs/maps/, $(SRC_MAPS)) \
+		$(addprefix ./srcs/map/, $(SRC_MAPS)) \
 		# $(addprefix ./srcs/draw/, $(SRC_DRAW)) \
 
 
@@ -39,3 +39,6 @@ fclean: clean
 	@rm -rf $(NAME)
 
 re: fclean all
+
+r:
+	make re && ./so_long map1.ber

@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:01:17 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/13 11:39:57 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:58:17 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,114 +18,76 @@ void free_map(t_map *smap) {
 		for (int i = 0; smap->map[i] != NULL; i++) {
 			free(smap->map[i]);
 		}
-
 		free(smap->map);
-
 		smap->map = NULL;
 	}
 }
 
-int	open_map_file(const char *map_path)
+void read_map_lines(t_vars *vars, int fd, t_map *smap, int ln_ctd)
 {
-	int	fd;
+	char	*line;
+
+	line = get_next_line(fd);
+	if(line)
+		read_map_lines(vars, fd, smap, ln_ctd + 1);
+	else if (ln_ctd > 0)
+	{
+		smap->map = malloc(sizeof(char *) * (ln_ctd + 1));
+		smap->cpymap = malloc(sizeof(char *) * (ln_ctd + 1));
+		smap->height  = ln_ctd + 1;
+	}
+	if (!smap->map || !smap->cpymap)
+		exit_game(vars, "das");
+	if (smap->map)
+	{
+		smap->map[ln_ctd] = line;
+		ft_printf("%s", smap->map[ln_ctd]);
+	}
+	if (smap->cpymap)
+		smap->cpymap[ln_ctd] = ft_strdup(line);
+}
+
+//==================READ FILE=====================//
+void read_map(t_vars *vars, t_map *map, const char *map_path)
+{
+	int		fd;
 
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
-	{
-		perror("Error opening map file");
-		return (-1);
-	}
-	return (fd);
-}
-
-t_map	read_map(const char *map_path)
-{
-	t_map	smap = {0};
-	int		fd;
-	int		ln_ctd;
-
-	ln_ctd = 0;
-	fd = open_map_file(map_path);
-	if (fd < 0)
-		return (smap);
-	read_map_lines(fd, &smap, &ln_ctd);
-	if (!smap.map)
-	{
-		printf("readmap smap.map ERROR");
-		close(fd);
-		return (t_map){0};
-	}
-	smap.height = ln_ctd;
-	if (!validate_map(&smap))
-	{
-		free_map(&smap);
-		close(fd);
-		printf("Map Not Validated on read_map\n");
-		return (t_map){0};
-	}
+		exit_game(vars, "Error opening map file");
+	read_map_lines(vars, fd, map, 0);
 	close(fd);
-	return (smap);
+	if (!map->map)
+		exit_game(vars, "readmap smap.map ERROR");
+	if (!validate_map(vars, map))
+		exit_game(vars, "Map Not Validated on read_map");
 }
 
-void read_map_lines(int fd, t_map *smap, int *ln_ctd)
+//============================READ EATCH LINE===============================//
+
+
+
+
+//===========================================MAIN FUNCTION=====================================//
+int	mapping(t_vars *vars, char *map_path)
 {
-	char *line;
-
-	*ln_ctd = 0;
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		if(*ln_ctd == 0)
-		{
-			smap->width = ft_strlen(line);
-			if(smap->width > 0 && line[smap->width - 1] == '\n')
-			{
-				line[smap->width - 1] = '\0';
-				smap->width--;
-			}
-		}
-	size_t old_size = (*ln_ctd) * sizeof(char *);
-	size_t new_size = (old_size) + sizeof(char *);
-	char **temp = (char **)ft_realloc(smap->map, old_size, new_size);
-
-	if(!temp)
-	{
-		perror("Failed to allocate memory for the map lines");
-		free_map(smap);
-		*ln_ctd = 0;
-		free(line);
-		return;
-	}
-	smap->map = temp;
-	smap->map[(*ln_ctd)++] = line;
-	}
-
-	smap->map = (char **)ft_realloc(smap->map, (*ln_ctd) * sizeof(char *), (*ln_ctd + 1) * sizeof(char *));
-	if(smap->map)
-	{
-		smap->map[*ln_ctd] = NULL;
-	}
-}
-
-
-int	mapping(char *map_path, t_map *smap)
-{
-
-	*smap = read_map(map_path);
-	printf("Map data:\n%d\n", smap->height);
-	printf("Map data:\n%d\n", smap->width);
-	if (!smap->map)
-	{
-		write(2, "Error reading Map\n", 18);
-		return (0);
-	}
-	if (!validate_map(smap))
-	{
-		write(2, "Map Validation Failed(MAPPING)\n", 31);
-		return (0);
-	}
+	read_map(vars, &vars->game, map_path);
+	// printf("Map data:\n%d\n", vars->game.height);
+	// printf("Map data:\n%d\n", vars->game.width);
+	 if (!vars->game.map)
+	 	exit_game(vars, "Error Reading Map");
+	 if (!validate_map(vars, &vars->game))
+	 	exit_game(vars, "Map Validation Failed(Mapping)");
+	// printf("Valid Borders\n");
 	return (1);
 }
 
+/* void	print_map(t_vars *vars, t_map *smap)
+{
+	while(smap->map)
+		printf()
+}
+ */
 
 
 

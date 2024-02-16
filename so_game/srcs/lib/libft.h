@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:35:52 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/14 18:07:30 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:04:19 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,6 @@ void				*ft_memset(void *b, int c, size_t len);
 void				*ft_calloc(size_t nmemb, size_t size);
 void				*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
+char				*ft_strdup(char *str);
+
 #endif
