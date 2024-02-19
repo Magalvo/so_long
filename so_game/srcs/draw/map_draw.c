@@ -6,13 +6,13 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:31:24 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/19 17:27:58 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:09:26 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/so_long.h"
 
-void    char_map(char map, t_vars *vars, int sx, int sy)
+/* void    char_map(char map, t_vars *vars, int sx, int sy)
 {
 	if (map == '0')
 		paintcanva(vars, &vars->person[1], sx * 64, sy* 64);
@@ -26,7 +26,7 @@ void    char_map(char map, t_vars *vars, int sx, int sy)
 		paintcanva(vars, &vars->person[2], sx * 64, sy* 64);
 	else
 		write(1, "Invalid Map Format(char map)", 28);
-}
+} */
 
 int draw_borders(t_map smapi, t_vars *vars)
 {
@@ -57,6 +57,6 @@ int draw_window(t_map smapi, t_vars *vars)
 					&vars->canva.bits_per_pixel,
 					&vars->canva.line_length,
 					&vars->canva.endian);
-	loadallimg(vars);
+	init_player(vars);
 	return(1);
 }

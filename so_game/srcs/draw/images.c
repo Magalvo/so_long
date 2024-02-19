@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:11:11 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/19 17:10:03 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:22:07 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ t_img	load_img(char *path, t_vars *varg)
 	return (img);
 }
 
-void	loadallimg(t_vars *vars)
+/* void	loadallimg(t_vars *vars)
 {
-	// vars->person = ft_calloc(sizeof(t_img), 5);
-	// if(!vars->person)
-	// 	return ;
-	// vars->person[0] = load_img("img/char/Idle64.xpm", vars);
-	// vars->person[1] = load_img("img/char/Pavement.xpm", vars);
-	// vars->person[2] = load_img("img/char/Grass64.xpm", vars);
-	// vars->person[3] = load_img("img/char/ChickenLit.xpm", vars);
-	// //vars->person[4] = load_img("img/char/Lion.xpm", vars);
-	// vars->person[4] = load_img("img/char/hole.xpm", vars);
-}
+	vars->objects = ft_calloc(sizeof(t_object), 5);
+	if(!vars->objects)
+		return ;
+	vars->person[0] = load_img("img/char/Idle64.xpm", vars);
+	vars->person[1] = load_img("img/char/Pavement.xpm", vars);
+	vars->person[2] = load_img("img/char/Grass64.xpm", vars);
+	vars->person[3] = load_img("img/char/ChickenLit.xpm", vars);
+	//vars->person[4] = load_img("img/char/Lion.xpm", vars);
+	vars->person[4] = load_img("img/char/hole.xpm", vars);
+} */

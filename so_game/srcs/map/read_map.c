@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:01:17 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/19 16:42:15 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:03:06 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void read_map(t_vars *vars, t_map *map, const char *map_path)
 	if (fd < 0)
 		exit_game(vars, "Error opening map file");
 	read_map_lines(vars, fd, map, 0);
-	ft_print_fill(map);
 	close(fd);
 	if (!map->map)
 		exit_game(vars, "readmap smap.map ERROR");

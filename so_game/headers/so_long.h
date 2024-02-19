@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:23:32 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/19 17:32:14 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:25:02 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ struct	s_object
 	int			x;
 	int			y;
 	t_img		*imgs;
-	void		(*render)(t_object *this);
+	void		(*render)(t_object *this, t_vars *vars);
 	t_object	*next;
 };
 
@@ -55,8 +55,13 @@ struct	s_map
 	int		height;
 	char	**map;
 	char	**cpymap;
-	int		collectibles_count;
+	int		collectibles_count; //All colectibles
+	int		collectibles_found; //Nuber of flood fill colectibles
+	int		exit_x;
+	int		exit_y;
 	int		exit_found;
+	int		player_x;
+	int		player_y;
 	int		sx[2];
 	int		sy[2];
 };
