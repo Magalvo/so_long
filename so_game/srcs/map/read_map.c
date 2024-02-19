@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:01:17 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/16 17:58:17 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:42:15 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void free_map(t_map *smap) {
 	}
 }
 
+
+
+//============================READ EATCH LINE===============================//
 void read_map_lines(t_vars *vars, int fd, t_map *smap, int ln_ctd)
 {
 	char	*line;
@@ -34,7 +37,7 @@ void read_map_lines(t_vars *vars, int fd, t_map *smap, int ln_ctd)
 	{
 		smap->map = malloc(sizeof(char *) * (ln_ctd + 1));
 		smap->cpymap = malloc(sizeof(char *) * (ln_ctd + 1));
-		smap->height  = ln_ctd + 1;
+		smap->height  = ln_ctd;
 	}
 	if (!smap->map || !smap->cpymap)
 		exit_game(vars, "das");
@@ -56,6 +59,7 @@ void read_map(t_vars *vars, t_map *map, const char *map_path)
 	if (fd < 0)
 		exit_game(vars, "Error opening map file");
 	read_map_lines(vars, fd, map, 0);
+	ft_print_fill(map);
 	close(fd);
 	if (!map->map)
 		exit_game(vars, "readmap smap.map ERROR");
@@ -63,24 +67,30 @@ void read_map(t_vars *vars, t_map *map, const char *map_path)
 		exit_game(vars, "Map Not Validated on read_map");
 }
 
-//============================READ EATCH LINE===============================//
-
-
-
 
 //===========================================MAIN FUNCTION=====================================//
 int	mapping(t_vars *vars, char *map_path)
 {
 	read_map(vars, &vars->game, map_path);
-	// printf("Map data:\n%d\n", vars->game.height);
-	// printf("Map data:\n%d\n", vars->game.width);
-	 if (!vars->game.map)
-	 	exit_game(vars, "Error Reading Map");
-	 if (!validate_map(vars, &vars->game))
-	 	exit_game(vars, "Map Validation Failed(Mapping)");
-	// printf("Valid Borders\n");
+	if(!vars->game.map)
+		exit_game(vars, "Error Reading Map");
+	if(!validate_map(vars, &vars->game))
+		exit_game(vars, "Map Validation Failed(Mapping)");
 	return (1);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* void	print_map(t_vars *vars, t_map *smap)
 {
@@ -88,11 +98,6 @@ int	mapping(t_vars *vars, char *map_path)
 		printf()
 }
  */
-
-
-
-
-
 
 /* int	count_lines(int fd)
 {

@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:23:32 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/16 17:18:32 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:32:14 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 
 #include "macros.h"
 
-typedef struct	s_object  t_object;
+typedef struct	s_object	t_object;
+typedef struct	s_map		t_map;
+typedef struct	s_img		t_img;
+typedef struct	s_vars		t_vars;
 
-typedef struct	s_img
+struct	s_img
 {
 	void	*img;
 	char	*addr;
@@ -35,7 +38,7 @@ typedef struct	s_img
 	int		prev_sy;
 	int		total_frames;
 	int		curr_frame;
-}				t_img;
+};
 
 struct	s_object
 {
@@ -46,17 +49,20 @@ struct	s_object
 	t_object	*next;
 };
 
-typedef struct	s_map {
+struct	s_map
+{
 	int		width;
 	int		height;
 	char	**map;
 	char	**cpymap;
 	int		collectibles_count;
 	int		exit_found;
-}				t_map;
+	int		sx[2];
+	int		sy[2];
+};
 
 
-typedef struct	s_vars
+struct	s_vars
 {
 	void		*mlx;
 	void		*win;
@@ -64,7 +70,11 @@ typedef struct	s_vars
 	t_object 	*player;
 	t_map		game;
 	t_img		canva;
-}				t_vars;
+};
+
+
+
+
 
 void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
 int			my_mlx_pixel_get(t_img *data, int x, int y);
@@ -81,6 +91,8 @@ void		update_sprite(t_img *img);
 int			animation_loop(t_vars *varg);
 int			draw_borders(t_map smapi, t_vars *vars);
 int			draw_window(t_map smapi, t_vars *vars);
+void		flood_fill(t_vars *vars, int sx, int sy, t_map *smap);
+void		ft_print_fill(t_map *smap);
 
 int 		exit_game(t_vars *vars, char *msg);
 void 		free_map(t_map *smap);
