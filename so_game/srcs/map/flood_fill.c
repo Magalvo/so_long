@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 12:06:45 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/19 20:50:36 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:43:59 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,15 @@ void	flood_fill(t_vars *vars, int sy, int sx, t_map *smap)
 }
 
 
-void	ft_print_fill(t_map *smap)
+void	ft_print_map(char **smap)
 {
 	int i;
-	
+
 	i=0;
-	while (smap->cpymap[i])
+	while (smap[i])
 	{
-		ft_printf("%s", smap->cpymap[i]);
+		ft_printf("%s", smap[i]);
 		i++;
 	}
 }
+

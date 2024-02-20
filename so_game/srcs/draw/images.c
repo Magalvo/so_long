@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:11:11 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/19 18:22:07 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:30:06 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_img	load_img(char *path, t_vars *varg)
 
 	if(varg->mlx)
 		printf("Good Init\n");
-
 	img.relative_path = path;
 	img.img = mlx_xpm_file_to_image(varg->mlx, img.relative_path, &img.img_width,
 			&img.img_height);
@@ -33,15 +32,10 @@ t_img	load_img(char *path, t_vars *varg)
 	return (img);
 }
 
-/* void	loadallimg(t_vars *vars)
-{
-	vars->objects = ft_calloc(sizeof(t_object), 5);
-	if(!vars->objects)
-		return ;
-	vars->person[0] = load_img("img/char/Idle64.xpm", vars);
-	vars->person[1] = load_img("img/char/Pavement.xpm", vars);
-	vars->person[2] = load_img("img/char/Grass64.xpm", vars);
-	vars->person[3] = load_img("img/char/ChickenLit.xpm", vars);
-	//vars->person[4] = load_img("img/char/Lion.xpm", vars);
-	vars->person[4] = load_img("img/char/hole.xpm", vars);
-} */
+// void	loadallimg(t_vars *vars)
+// {
+// 	vars->objects = ft_calloc(sizeof(t_object), 5);
+// 	if(!vars->objects)
+// 		return ;
+
+// }

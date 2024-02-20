@@ -6,57 +6,100 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:31:24 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/20 11:43:57 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/20 18:22:31 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/so_long.h"
 
-/* void	char_map(char map, t_vars *vars, int sx, int sy)
-{
-	if (map == '0')
-		paintcanva(vars, &vars->, sx * 64, sy* 64);
-	else if (map == 'C')
-		paintcanva(vars, &vars->person[3], sx * 64, sy* 64);
-	else if (map == 'E')
-		paintcanva(vars, &vars->person[4], sx * 64, sy* 64);
-	else if (map == 'P')
-		paintcanva(vars, &vars->person[0], sx * 64, sy* 64);
-	else if (map == '1')
-		paintcanva(vars, &vars->person[2], sx * 64, sy* 64);
-	else
-		exit_game(vars, "Invalid Map Format(map_draw)");
-} */
 
-int draw_borders(t_map smapi, t_vars *vars)
+void create_object_all(t_map smapi, t_vars *vars)
 {
-	int x;
-	int y;
+	int 		x;
+	int 		y;
+	t_object 	*end;
+	t_object	*tmp;
 
 	y = 0;
+	end = NULL;
 	while (y < smapi.height)
 	{
 		x = 0;
 		while (x < smapi.width)
 		{
-			char_map(smapi.map[y][x], vars, x, y);
+			if (smapi.map[y][x] == '1' && ++x)
+				continue;
+			tmp = NULL;
+			if (smapi.map[y][x] == 'P')
+				tmp = new_player(vars, x, y);
+			else if (smapi.map[y][x] == 'C')
+				tmp = new_colectacle(vars, x, y);
+			else if (smapi.map[y][x] == 'E')
+			 	tmp = new_exit(vars, x, y);
+			// else if (smapi.map[y][x] == 'X')
+			if (tmp)
+			{
+				if (vars->objects == NULL)
+					vars->objects = tmp;
+				else if (end)
+					end->next = tmp;
+				end = tmp;
+			}
+			smapi.map[y][x] = '0';
 			x++;
 		}
 		y++;
 	}
+}
+
+
+int draw_map(t_vars *vars)
+{
+	int x;
+	int y;
+	t_object *tmp;
+
+	y = -1;
+	while (++y < vars->game.height)
+	{
+		x = -1;
+		while (++x < vars->game.width)
+		{
+			if (vars->game.map[y][x] == '1')
+				paintcanva(vars, &vars->wall, x * 64, y * 64);
+			else if (vars->game.map[y][x] == '0')
+				paintcanva(vars, &vars->floor, x * 64, y * 64);
+		}
+	}
+	tmp = vars->objects;
+	while (tmp != NULL)
+	{
+		tmp->render(tmp, vars);
+		tmp = tmp->next;
+	}
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->canva.img, 0, 0);
 	return (0);
 }
 
-int draw_window(t_map smapi, t_vars *vars)
+int init_window(t_map smapi, t_vars *vars)
 {
 	vars->mlx = mlx_init();
-	printf("smapi.widht: %d\n", smapi.width);
-	vars->win = mlx_new_window(vars->mlx, (smapi.width * 64), (smapi.height * 64), "so_long");
-	vars->canva.img = mlx_new_image(vars->mlx, (smapi.width * 64), (smapi.height * 64));
+	if (!vars->mlx)
+		return (0);
+	ft_printf("smapi.widht: %d\n", smapi.width);
+	ft_printf("smapi.height: %d\n", smapi.height);
+	vars->canva.img_width = (smapi.width * 64);
+	vars->canva.img_height = (smapi.height * 64);
+	vars->win = mlx_new_window(vars->mlx, vars->canva.img_width , \
+	vars->canva.img_height, "so_long");
+	vars->canva.img = mlx_new_image(vars->mlx,  vars->canva.img_width , \
+	vars->canva.img_height);
 	vars->canva.addr = mlx_get_data_addr(vars->canva.img,
 					&vars->canva.bits_per_pixel,
 					&vars->canva.line_length,
 					&vars->canva.endian);
-	init_player(vars);
+	vars->wall = load_img("img/char/Grass64.xpm", vars);
+	vars->floor = load_img("img/char/Pavement.xpm", vars);
+	create_object_all(vars->game, vars);
 	return(1);
 }

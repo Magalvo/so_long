@@ -6,19 +6,25 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:44:47 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/19 18:03:49 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/20 18:25:54 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/so_long.h"
-#include <unistd.h>
-
-
 
 int exit_game(t_vars *vars, char *msg)
 {
 	ft_printf("%s\n", msg);
 	free_map(&vars->game);
+	if (vars->mlx)
+	{
+		mlx_destroy_image(vars->mlx, vars->canva.img);
+		mlx_destroy_image(vars->mlx, vars->wall.img);
+		mlx_destroy_image(vars->mlx, vars->floor.img);
+		mlx_destroy_window(vars->mlx, vars->win);
+		mlx_destroy_display(vars->mlx);
+	}
+	free(vars->mlx);
 	exit(0);
 }
 
@@ -99,11 +105,11 @@ int	validate_borders(t_vars *vars,t_map *map)
  		(validate_borders_height(vars, &vars->game));
 }
 
-int switch_char(t_vars *vars, t_map *smap, int *players, int *exits, int *collectibles, int *sx, int *sy)
+void	switch_char(t_vars *vars, t_map *smap, int *players, int *exits, int *collectibles, int *sx, int *sy)
 {
-	char tile;
-	int y;
-	int x;
+	char	tile;
+	int		y;
+	int		x;
 
 	y = 0;
 	while (y < smap->height)
@@ -112,12 +118,8 @@ int switch_char(t_vars *vars, t_map *smap, int *players, int *exits, int *collec
 		while (x < smap->width)
 		{
 			tile = smap->map[y][x];
-			if (tile == 'P')
+			if (tile == 'P' && (*players) == 0)
 			{
-				if ((*players) > 0)
-				{
-					exit_game(vars, "More than 1 player is not allowed!");
-				}
 				*sy = y;
 				*sx = x;
 				(*players)++;
@@ -126,22 +128,19 @@ int switch_char(t_vars *vars, t_map *smap, int *players, int *exits, int *collec
 				(*exits)++;
 			if (tile == 'C')
 				(*collectibles)++;
-			if (tile != 'C' && tile != '1' && tile != '0' && tile != 'P' && tile != 'E')
-				exit_game(vars, "Invalid Char on Map");
 			x++;
 		}
 		y++;
 	}
-	return(1);
 }
 
 int	validate_map(t_vars *vars, t_map *map)
 {
-	int players;
-	int exits;
-	int collectibles;
-	int sx;
-	int sy;
+	int	players;
+	int	exits;
+	int	collectibles;
+	int	sx;
+	int	sy;
 
 	sx = 0;
 	sy = 0;
@@ -150,13 +149,13 @@ int	validate_map(t_vars *vars, t_map *map)
 	players = 0;
 	if (!validate_borders(vars,map))
 		exit_game(vars, "Error on map validation(map_check.c)");
-
  	switch_char(vars, map, &players, &exits, &collectibles, &sx, &sy);
 	if	(players != 1 || exits != 1 || collectibles <= 0)
 		exit_game(vars, "Error Validating Items");
+	map->objects_count = collectibles + 2;
 	flood_fill(vars, sy, sx, map);
 	map->cpymap[sy][sx] = 'P';
-	ft_print_fill(map);
+	ft_print_map(map->cpymap);
 	if	(map->collectibles_count <= 0 || map->exit_found != 1)
 		exit_game(vars, "The Fox is Trapped OR Can't find any chickens :(");
 	ft_printf("Finish Verify\n");
