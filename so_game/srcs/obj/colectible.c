@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:20:43 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/20 18:20:44 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:26:42 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void __render(t_object *this, t_vars *vars)
 	paintcanva(vars, &this->imgs[0], this->x * 64, this->y * 64);
 }
 
-t_object *new_colectacle(t_vars *vars, int x, int y)
+t_object *new_collectible(t_vars *vars, int x, int y)
 {
 	t_object *this;
 

@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:31:24 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/20 18:22:31 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:27:55 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void create_object_all(t_map smapi, t_vars *vars)
 			if (smapi.map[y][x] == 'P')
 				tmp = new_player(vars, x, y);
 			else if (smapi.map[y][x] == 'C')
-				tmp = new_colectacle(vars, x, y);
+				tmp = new_collectible(vars, x, y);
 			else if (smapi.map[y][x] == 'E')
 			 	tmp = new_exit(vars, x, y);
 			// else if (smapi.map[y][x] == 'X')

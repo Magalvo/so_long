@@ -6,13 +6,14 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:01:17 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/19 20:16:50 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:38:33 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/so_long.h"
 
-void free_map(t_map *smap) {
+void free_map(t_map *smap) 
+{
 	if (smap->map != NULL) {
 
 		for (int i = 0; smap->map[i] != NULL; i++) {
@@ -27,8 +28,6 @@ void free_map(t_map *smap) {
 		smap->map = NULL;
 	}
 }
-
-
 
 //============================READ EATCH LINE===============================//
 void read_map_lines(t_vars *vars, int fd, t_map *smap, int ln_ctd)

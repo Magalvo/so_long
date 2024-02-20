@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:23:32 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/20 18:20:15 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:39:04 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,10 @@ int 		exit_game(t_vars *vars, char *msg);
 void 		free_map(t_map *smap);
 
 
+
 //===================OBJECTS===================//
 t_object	*new_player(t_vars *vars, int x, int y);
-t_object	*new_colectacle(t_vars *vars, int x, int y);
+t_object	*new_collectible(t_vars *vars, int x, int y);
 t_object	*new_exit(t_vars *vars, int x, int y);
 
 #endif
