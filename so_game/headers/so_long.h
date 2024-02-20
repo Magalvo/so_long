@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:23:32 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/20 11:19:14 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:36:52 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,23 +83,32 @@ struct	s_vars
 
 void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
 int			my_mlx_pixel_get(t_img *data, int x, int y);
-t_img		load_img(char *path, t_vars *varg);
+
 
 //void paint_canvaw(t_vars *varg, t_img *img, float w, float h);
 void		paintcanva(t_vars *varg, t_img *img, int sx, int sy);
 void		paint_canvaw(t_vars *varg, t_img *img);
+
+
+//===================CHECKERS===================//
 int			name_check(t_vars *vars, char *pathname);
 int			mapping(t_vars *vars, char *map);
 int			validate_map(t_vars *vars, t_map *smap);
+void		flood_fill(t_vars *vars, int sx, int sy, t_map *smap);
+void		ft_print_fill(t_map *smap);
+
+
+//===================DRAW======================//
 void		update_sprite(t_img *img);
 int			animation_loop(t_vars *varg);
 int			draw_borders(t_map smapi, t_vars *vars);
 int			draw_window(t_map smapi, t_vars *vars);
-void		flood_fill(t_vars *vars, int sx, int sy, t_map *smap);
-void		ft_print_fill(t_map *smap);
+t_img		load_img(char *path, t_vars *varg);
 t_object	*create_object(int x, int y, t_img *imgs, void (*render)(t_object *));
 void		append_object(t_object **list, t_object *new_obj);
 
+
+//===================CLEANING===================//
 int 		exit_game(t_vars *vars, char *msg);
 void 		free_map(t_map *smap);
 

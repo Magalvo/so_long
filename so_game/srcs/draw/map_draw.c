@@ -6,16 +6,16 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:31:24 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/19 18:09:26 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:43:57 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/so_long.h"
 
-/* void    char_map(char map, t_vars *vars, int sx, int sy)
+/* void	char_map(char map, t_vars *vars, int sx, int sy)
 {
 	if (map == '0')
-		paintcanva(vars, &vars->person[1], sx * 64, sy* 64);
+		paintcanva(vars, &vars->, sx * 64, sy* 64);
 	else if (map == 'C')
 		paintcanva(vars, &vars->person[3], sx * 64, sy* 64);
 	else if (map == 'E')
@@ -25,7 +25,7 @@
 	else if (map == '1')
 		paintcanva(vars, &vars->person[2], sx * 64, sy* 64);
 	else
-		write(1, "Invalid Map Format(char map)", 28);
+		exit_game(vars, "Invalid Map Format(map_draw)");
 } */
 
 int draw_borders(t_map smapi, t_vars *vars)
