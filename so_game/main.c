@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 10:30:35 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/19 18:21:58 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:16:15 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,8 @@ int main(int argc, char **argv)
 		name_check(&vars, argv[1]);
 		mapping(&vars, argv[1]);
 
-		 //if (draw_window(vars.game, &vars) == 0)
-		// {
-		// 	write(1, "Falha ao alocar memoria no jogo\n", 32);
-		// 	return (0);
-		// }
+		if (draw_window(vars.game, &vars) == 0)
+			exit_game(&vars, "Error creating window");
 		// draw_borders(vars.game, &vars);
 		// mlx_put_image_to_window(vars.mlx, vars.win, vars.canva.img, 0, 0);
 		// mlx_key_hook(vars.win, key_hook, &vars);
