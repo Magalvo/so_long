@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:01:17 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/19 18:03:06 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/19 20:16:50 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,12 @@ void free_map(t_map *smap) {
 		for (int i = 0; smap->map[i] != NULL; i++) {
 			free(smap->map[i]);
 		}
+		for (int x = 0; smap->cpymap[x] != NULL; x++) {
+			free(smap->cpymap[x]);
+		}
 		free(smap->map);
+		free(smap->cpymap);
+		smap->cpymap = NULL;
 		smap->map = NULL;
 	}
 }

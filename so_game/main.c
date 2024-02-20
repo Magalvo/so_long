@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 10:30:35 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/20 11:16:15 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:27:13 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int main(int argc, char **argv)
 		// mlx_key_hook(vars.win, key_hook, &vars);
 		// mlx_loop_hook(vars.mlx, animation_loop, &vars);
 		// mlx_loop(vars.mlx);
+		exit_game(&vars, "Finished running program");
 	}
 	return (0);
 }
