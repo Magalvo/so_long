@@ -6,36 +6,11 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:44:47 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/21 14:25:33 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:17:20 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/so_long.h"
-
-
-int	name_check(t_vars *vars, char *pathname)
-{
-	int	j;
-	int	i;
-
-	i = 0;
-	j = 0;
-	i = ft_strlen(pathname);
-	if (i <= 4)
-		return (!write(1, "Invalid Map Format(map_check)", 29));
-	if (pathname[i - 1] == 'r')
-		j = 1;
-	if (pathname[i - 2] == 'e')
-		j += 1;
-	if (pathname[i - 3] == 'b')
-		j += 1;
-	if (pathname[i - 4] == '.')
-		j += 1;
-	if (j == 0)
-		exit_game(vars, "Invalid Map Format(sec check)");
-	return (j);
-}
-
 
 int	validate_borders_width(t_vars *vars, t_map *map)
 {
@@ -90,7 +65,7 @@ int	validate_borders(t_vars *vars,t_map *map)
  		(validate_borders_height(vars, &vars->game));
 }
 
-void	switch_char(t_vars *vars, t_map *smap, int *players, int *exits, int *collectibles, int *sx, int *sy)
+int		switch_char(t_vars *vars, t_map *smap, int *players, int *exits, int *collectibles, int *sx, int *sy)
 {
 	char	tile;
 	int		y;

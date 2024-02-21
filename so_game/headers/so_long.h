@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:23:32 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/21 16:02:37 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:10:11 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void		flood_fill(t_vars *vars, int sx, int sy, t_map *smap);
 void		ft_print_map(char **);
 void 		create_object_all(t_map smapi, t_vars *vars);
 
-
 //===================DRAW======================//
 void		paintcanva(t_vars *varg, t_img *img, int sx, int sy);
 void		paint_canvaw(t_vars *varg, t_img *img);
@@ -102,14 +101,10 @@ t_img		load_img(char *path, t_vars *varg);
 void		append_object(t_object **list, t_object *new_obj);
 int			move_player(t_object *this, int sx, int sy, t_vars *vars);
 
-
 //===================CLEANING===================//
 int 		exit_game(t_vars *vars, char *msg);
 void 		free_map(t_map *smap);
 void		free_objects(t_object *objects, t_vars *vars);
-
-
-
 
 //===================OBJECTS===================//
 t_object	*new_player(t_vars *vars, int x, int y);

@@ -6,11 +6,37 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:01:17 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/21 16:08:04 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:12:02 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/so_long.h"
+
+
+//============================EXTENSION CHECK===============================//
+int	name_check(t_vars *vars, char *pathname)
+{
+	int	j;
+	int	i;
+
+	i = 0;
+	j = 0;
+	i = ft_strlen(pathname);
+	if (i <= 4)
+		return (!write(1, "Invalid Map Format(map_check)", 29));
+	if (pathname[i - 1] == 'r')
+		j = 1;
+	if (pathname[i - 2] == 'e')
+		j += 1;
+	if (pathname[i - 3] == 'b')
+		j += 1;
+	if (pathname[i - 4] == '.')
+		j += 1;
+	if (j == 0)
+		exit_game(vars, "Invalid Map Format(sec check)");
+	return (j);
+}
+
 
 //============================READ EATCH LINE===============================//
 void read_map_lines(t_vars *vars, int fd, t_map *smap, int ln_ctd)

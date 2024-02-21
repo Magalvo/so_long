@@ -45,7 +45,6 @@ int exit_game(t_vars *vars, char *msg)
 		mlx_destroy_image(vars->mlx, vars->canva.img);
 		mlx_destroy_image(vars->mlx, vars->wall.img);
 		mlx_destroy_image(vars->mlx, vars->floor.img);
-		mlx_destroy_image(vars->mlx, vars->exit.img);
 		mlx_destroy_window(vars->mlx, vars->win);
 		mlx_destroy_display(vars->mlx);
 	}
