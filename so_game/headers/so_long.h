@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:23:32 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/20 21:39:04 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:02:37 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ int			move_player(t_object *this, int sx, int sy, t_vars *vars);
 //===================CLEANING===================//
 int 		exit_game(t_vars *vars, char *msg);
 void 		free_map(t_map *smap);
+void		free_objects(t_object *objects, t_vars *vars);
+
 
 
 

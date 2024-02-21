@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:31:24 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/20 20:27:55 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:01:22 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int draw_map(t_vars *vars)
 		{
 			if (vars->game.map[y][x] == '1')
 				paintcanva(vars, &vars->wall, x * 64, y * 64);
+			else if (vars->game.map[y][x] == 'E')
+				paintcanva(vars, &vars->exit, x * 64, y * 64);
 			else if (vars->game.map[y][x] == '0')
 				paintcanva(vars, &vars->floor, x * 64, y * 64);
 		}
@@ -99,6 +101,7 @@ int init_window(t_map smapi, t_vars *vars)
 					&vars->canva.line_length,
 					&vars->canva.endian);
 	vars->wall = load_img("img/char/Grass64.xpm", vars);
+	vars->exit = load_img("img/char/hole.xpm", vars);
 	vars->floor = load_img("img/char/Pavement.xpm", vars);
 	create_object_all(vars->game, vars);
 	return(1);

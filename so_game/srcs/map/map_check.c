@@ -6,27 +6,12 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:44:47 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/20 21:39:47 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:25:33 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/so_long.h"
 
-int exit_game(t_vars *vars, char *msg)
-{
-	ft_printf("%s\n", msg);
-	free_map(&vars->game);
-	if (vars->mlx)
-	{
-		mlx_destroy_image(vars->mlx, vars->canva.img);
-		mlx_destroy_image(vars->mlx, vars->wall.img);
-		mlx_destroy_image(vars->mlx, vars->floor.img);
-		mlx_destroy_window(vars->mlx, vars->win);
-		mlx_destroy_display(vars->mlx);
-	}
-	free(vars->mlx);
-	exit(0);
-}
 
 int	name_check(t_vars *vars, char *pathname)
 {

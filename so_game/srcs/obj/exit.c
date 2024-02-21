@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:20:35 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/20 18:21:40 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:06:45 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,3 +33,4 @@ t_object *new_exit(t_vars *vars, int x, int y)
 	printf("exit\n");
 	return (exit);
 }
+

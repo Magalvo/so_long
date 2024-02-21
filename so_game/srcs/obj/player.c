@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:20:49 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/20 18:20:52 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:02:47 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,16 @@ t_object *new_player(t_vars *vars, int x, int y)
 {
 	t_object *player;
 
-	player = ft_calloc(1, sizeof(t_object));
+	player = ft_calloc(sizeof(t_object), 1);
 	if (!player)
 		exit_game(vars, "er");
 	vars->player = player;
 	player->x = x;
 	player->y = y;
 	player->render = __render;
-	player->imgs = ft_calloc(1, sizeof(t_img));
+	player->imgs = ft_calloc(sizeof(t_img),1);
 	player->imgs[0] = load_img("img/char/UniFox.xpm", vars);
 	printf("player\n");
 	return (player);
 }
+

@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:20:43 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/20 20:26:42 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:02:57 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,3 +35,4 @@ t_object *new_collectible(t_vars *vars, int x, int y)
 	printf("this\n");
 	return (this);
 }
+
