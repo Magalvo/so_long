@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:11:17 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/14 15:01:43 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:11:52 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	paintcanva(t_vars *varg, t_img *img, int sx, int sy)
 	}
 }
 
-void	paint_canvaw(t_vars *varg, t_img *img)
+void	paint_canvaw(t_vars *varg, t_img *img, int sx, int sy)
 {
 	int	frame_width;
 	int	frame_x_offset;
@@ -42,14 +42,14 @@ void	paint_canvaw(t_vars *varg, t_img *img)
 
 	frame_width = img->img_width / img->total_frames;
 	frame_x_offset = img->curr_sprite * frame_width;
-	y = 0;
-	while (y < img->img_height)
+	y = img->curr_frame;
+	while (y < img->curr_frame + 64)
 	{
 		x = 0;
 		while (x < frame_width)
 		{
 			color = my_mlx_pixel_get(img, frame_x_offset + x, y);
-			my_mlx_pixel_put(&varg->canva, img->curr_sx + x, img->curr_sy + y,
+			my_mlx_pixel_put(&varg->canva, sx + x, sy + y,
 					color);
 			++x;
 		}

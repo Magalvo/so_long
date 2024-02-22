@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 10:30:35 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/21 14:36:45 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:18:30 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,10 @@ int main(int argc, char **argv)
 		mapping(&vars, argv[1]);
 		if (init_window(vars.game, &vars) == 0)
 			exit_game(&vars, "Failed to draw window");
-		// if (draw_borders(vars.game, &vars) == 0)
-		// 	exit_game(&vars, "Failed to draw borders");
-		// mlx_put_image_to_window(vars.mlx, vars.win, vars.canva.img, 0, 0);
 		mlx_key_hook(vars.win, key_hook, &vars);
 		mlx_loop_hook(vars.mlx, (void *)draw_map, &vars);
 		mlx_loop(vars.mlx);
-		exit_game(&vars, "Finished running program");
+		//exit_game(&vars, "Finished running program");
 	}
 	return (0);
 }

@@ -2,23 +2,23 @@
 #include "../../headers/so_long.h"
 
 
-void free_objects(t_object *head, t_vars *vars) 
+void free_objects(t_object *head, t_vars *vars)
 {
-    t_object *tmp;
+	t_object *tmp;
 
-    while (head != NULL)
-    {
-        tmp = head;
-        head = head->next;
-        if (tmp->imgs) {
-            mlx_destroy_image(vars->mlx, tmp->imgs[0].img);
-            free(tmp->imgs);
-        }
-        free(tmp);
-    }
+	while (head != NULL)
+	{
+		tmp = head;
+		head = head->next;
+		if (tmp->imgs) {
+			mlx_destroy_image(vars->mlx, tmp->imgs[0].img);
+			free(tmp->imgs);
+		}
+		free(tmp);
+	}
 }
 
-void	free_map(t_map *smap) 
+void	free_map(t_map *smap)
 {
 	if (smap->map != NULL) {
 
