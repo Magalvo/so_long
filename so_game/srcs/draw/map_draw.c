@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:31:24 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/22 18:13:34 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:46:17 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ int draw_map(t_vars *vars)
 		tmp->render(tmp, vars);
 		tmp = tmp->next;
 	}
+	
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->canva.img, 0, 0);
-	usleep(100000);
 	return (0);
 }
 

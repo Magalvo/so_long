@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:44:47 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/21 16:17:20 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:57:58 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ int	validate_map(t_vars *vars, t_map *map)
 	flood_fill(vars, sy, sx, map);
 	map->cpymap[sy][sx] = 'P';
 	ft_print_map(map->cpymap);
-	if	(map->collectibles_count <= 0 || map->exit_found != 1)
-		exit_game(vars, "The Fox is Trapped OR Can't find any chickens :(");
+	if	(map->collectibles_count != collectibles || map->exit_found != 1)
+		exit_game(vars, "The Fox is Trapped OR Can't find all chickens :(");
 	ft_printf("Finish Verify\n");
 	return (1);
 }

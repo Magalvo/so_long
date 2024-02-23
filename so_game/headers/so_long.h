@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:23:32 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/22 17:46:33 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:39:36 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ struct	s_img
 {
 	void	*img;
 	char	*addr;
+	char	*relative_path;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	char	*relative_path;
 	int		curr_sprite;
 	int		tamsprite;
 	int		img_width;
@@ -42,10 +42,10 @@ struct	s_img
 
 struct	s_object
 {
+	void		(*render)(t_object *this, t_vars *vars);
 	int			x;
 	int			y;
 	t_img		*imgs;
-	void		(*render)(t_object *this, t_vars *vars);
 	t_object	*next;
 };
 
@@ -53,11 +53,11 @@ struct	s_map
 {
 	int		width;
 	int		height;
-	char	**map;
-	char	**cpymap;
 	int		collectibles_count; //All reatchable colectibles
 	int		objects_count; 		//All objects(player, exit and colectibles)
 	int		exit_found;
+	char	**map;
+	char	**cpymap;
 };
 
 
@@ -65,6 +65,7 @@ struct	s_vars
 {
 	void		*mlx;
 	void		*win;
+	int			pdirection;
 	t_object 	*objects;
 	t_object 	*player;
 	t_map		game;

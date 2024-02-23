@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:11:17 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/22 18:11:52 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:06:15 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	paint_canvaw(t_vars *varg, t_img *img, int sx, int sy)
 	}
 }
 
+
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
@@ -74,3 +75,5 @@ int	my_mlx_pixel_get(t_img *data, int x, int y)
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	return (*(unsigned int *)dst);
 }
+
+
