@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:31:24 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/23 14:46:17 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:20:51 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_object *create_object(t_vars *vars, char map_char, int x, int y) {
 		tmp = new_collectible(vars, x, y);
 	else if (map_char == 'E')
 		tmp = new_exit(vars, x, y);
+	else if (map_char == 'X')
+		tmp = new_enemy(vars, x, y);
 
 	return tmp;
 }
@@ -90,7 +92,7 @@ int draw_map(t_vars *vars)
 		tmp->render(tmp, vars);
 		tmp = tmp->next;
 	}
-	
+	usleep(100000);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->canva.img, 0, 0);
 	return (0);
 }

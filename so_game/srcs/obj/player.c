@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:20:49 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/23 17:22:12 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/25 00:37:50 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_object *new_player(t_vars *vars, int x, int y)
 	player->y = y;
 	player->render = __render;
 	player->imgs = ft_calloc(sizeof(t_img),1);
-	player->imgs[0] = load_img("img/Player/FoxAll.xpm", vars);
+	player->imgs[0] = load_img("img/Player/FoxAllrr.xpm", vars);
 	player->imgs->total_frames = 3;
 	player->imgs->curr_frame = 0;
 	player->imgs->curr_sprite = 0;
