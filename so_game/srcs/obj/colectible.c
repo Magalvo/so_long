@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:20:43 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/23 17:10:49 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/24 20:43:27 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,57 @@
 
 #include "../../headers/so_long.h"
 
+void	update_chicken_sprite(t_img *img)
+{
+	img->curr_frame = (img->curr_frame + 1) % img->total_frames;
+}
 
+void	paint_chicken(t_vars *vars, t_img *img, int x, int y)
+{
+	int	frame_x_offset;
+	int frame_y_offset;
+	int	sy;
+	int	sx;
+	int	color;
+
+	frame_x_offset = (img->curr_frame % img->total_frames) * WIDTH;
+	frame_y_offset = HEIGHT;
+	sy = 0;
+	while (sy < HEIGHT)
+	{
+		sx= 0;
+		while (sx < WIDTH)
+		{
+			color = my_mlx_pixel_get(img, frame_x_offset + sx, sy);
+			my_mlx_pixel_put(&vars->canva, x + sx, y + sy, color);
+			sx++;
+		}
+		sy++;
+	}
+}
 static void __render(t_object *this, t_vars *vars)
 {
-	paintcanva(vars, &this->imgs[0], this->x * 64, this->y * 64);
+	update_chicken_sprite(&this->imgs[0]);
+	paint_chicken(vars, &this->imgs[0], this->x * 64, this->y * 64);
 }
 
 t_object *new_collectible(t_vars *vars, int x, int y)
 {
 	t_object *this;
 
-	this = ft_calloc(1, sizeof(t_object));
+	this = ft_calloc(sizeof(t_object), 1);
 	if (!this)
-		exit_game(vars, "er");
+		exit_game(vars, "Error on collectible");
 	this->x = x;
 	this->y = y;
 	this->render = __render;
-	this->imgs = ft_calloc(1, sizeof(t_img));
-	this->imgs[0] = load_img("img/char/UniChicken.xpm", vars);
-	printf("this\n");
+	this->imgs = ft_calloc(sizeof(t_img), 1);
+	this->imgs[0] = load_img("img/Chicken/ChickenLit.xpm", vars);
+	this->imgs->total_frames = 4;
+	this->imgs->curr_frame = 0;
+	this->imgs->curr_sprite = 0;
+	printf("colectibleIn\n");
 	return (this);
 }
+
 
