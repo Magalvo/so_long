@@ -4,7 +4,7 @@ SRC_PRINTF = aux_print.c ft_printf.c
 SRC_GNL = get_next_line_bonus.c get_next_line_utils_bonus.c
 SRC_DRAW = draw.c images.c map_draw.c sprites.c
 SRC_MAPS = flood_fill.c map_check.c read_map.c
-SRC_OBJS = player.c colectible.c exit.c cleaning.c
+SRC_OBJS = player.c colectible.c exit.c cleaning.c enemy.c
 SRC_LIBFT = ft_putstr_fd.c ft_strlen.c ft_putchar_fd.c ft_memset.c \
 			ft_calloc.c ft_strdup.c
 

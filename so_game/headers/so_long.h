@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:23:32 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/23 16:39:36 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/26 00:57:08 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ struct	s_vars
 	void		*mlx;
 	void		*win;
 	int			pdirection;
+	int			xdirection;
 	t_object 	*objects;
+	t_object	*enemy;
 	t_object 	*player;
 	t_map		game;
 	t_img		canva;
@@ -97,8 +99,10 @@ void		paint_canvaw(t_vars *varg, t_img *img, int sx, int sy);
 void		update_sprite(t_img *img);
 int 		draw_map(t_vars *vars);
 int			init_window(t_map smapi, t_vars *vars);
-t_img		load_img(char *path, t_vars *varg);
 int			move_player(t_object *this, int sx, int sy, t_vars *vars);
+int			move_enemy(t_object *this, t_vars *vars);
+t_img		load_img(char *path, t_vars *varg);
+
 
 //===================CLEANING===================//
 int 		exit_game(t_vars *vars, char *msg);
@@ -109,5 +113,6 @@ void		free_objects(t_object *objects, t_vars *vars);
 t_object	*new_player(t_vars *vars, int x, int y);
 t_object	*new_collectible(t_vars *vars, int x, int y);
 t_object	*new_exit(t_vars *vars, int x, int y);
+t_object	*new_enemy(t_vars *vars, int x, int y);
 
 #endif
