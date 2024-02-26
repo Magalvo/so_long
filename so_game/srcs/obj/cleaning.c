@@ -51,3 +51,9 @@ int exit_game(t_vars *vars, char *msg)
 	free(vars->mlx);
 	exit(0);
 }
+
+int	close_window(t_vars *vars)
+{
+	exit_game(vars, "Game Closed, shutting down...\n");
+	return(1);
+}

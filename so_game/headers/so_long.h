@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:23:32 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/26 17:03:32 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:17:50 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ struct	s_map
 {
 	int		width;
 	int		height;
-	int		collectibles_count; //All reatchable colectibles
+	int		collectibles_count; //All reatchable colectibles()
 	int		objects_count; 		//All objects(player, exit and colectibles)
 	int		exit_found;
 	char	**map;
@@ -112,8 +112,10 @@ t_img		load_img(char *path, t_vars *varg);
 
 //===================CLEANING===================//
 int 		exit_game(t_vars *vars, char *msg);
+int			close_window(t_vars *vars);
 void 		free_map(t_map *smap);
 void		free_objects(t_object *objects, t_vars *vars);
+
 
 //===================OBJECTS===================//
 t_object	*new_player(t_vars *vars, int x, int y);

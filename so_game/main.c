@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 10:30:35 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/26 17:08:30 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:01:48 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	key_hook(int key, t_vars *vars)
 	count = 0;
     if (key == XK_Escape)
         exit_game(vars, "The %d key (ESC) has been pressed");
+	else if (key == 17)
+		exit_game(vars, "The %d key (ESC) has been pressed");
     //ft_printf("The %d key has been pressed\n\n", key);
 	pick_dir(key, vars);
 	move_player(vars->player, (key == XK_d) - (key == XK_a), \
@@ -71,6 +73,7 @@ int main(int argc, char **argv)
 		mapping(&vars, argv[1]);
 		if (init_window(vars.game, &vars) == 0)
 			exit_game(&vars, "Failed to draw window");
+		mlx_hook(vars.win, 17, 0, close_window, &vars);
 		mlx_key_hook(vars.win, key_hook, &vars);
 		mlx_loop_hook(vars.mlx, (void *)move_enemy, &vars.enemy);
 		mlx_loop_hook(vars.mlx, (void *)draw_map, &vars);

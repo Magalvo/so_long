@@ -38,9 +38,11 @@ static void	__render(t_object *this, t_vars *vars)
 	if (this->move_counter++ >= this->move_interval)
 	{
 		this->move_counter = 0;
-		if(!move_enemy(this, vars))
-			enemy_dir(vars);
+		/* if(!move_enemy(this, vars))
+			enemy_dir(vars); */
 		//ft_printf("DIR: %d", vars->xdirection);
+		enemy_dir(vars);
+		move_enemy(this, vars);
 	}
 	update_enemy_sprite(&this->imgs[0]);
 	paint_enemy(vars, &this->imgs[0], this->x * 64, this->y * 64);
@@ -89,7 +91,7 @@ t_object *new_enemy(t_vars *vars, int x, int y)
 	enemy->imgs = ft_calloc(sizeof(t_img),1);
 	enemy->imgs[0] = load_img("img/Enemy/Lion4x42.xpm", vars);
 	enemy->move_counter = 0;
-	enemy->move_interval = 20;
+	enemy->move_interval = 5;
 	enemy->imgs->total_frames = 4;
 	enemy->imgs->curr_frame = 0;
 	enemy->imgs->curr_sprite = 0;
