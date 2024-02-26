@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:22:07 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/23 17:03:58 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/26 21:39:33 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <fcntl.h>
 # include <string.h>
 
+#define NUM_DIGITS 10
 #define KEY_W 119 
 #define KEY_A 97  
 #define KEY_S 115 

@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:20:49 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/26 18:05:55 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/26 22:21:17 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ static void	__render(t_object *this, t_vars *vars)
 {
 	update_player_sprite(&this->imgs[0]);
 	paint_player(vars, &this->imgs[0], this->x * 64, this->y * 64);
-	/* if(vars->enemy->x == this->x && vars->enemy->y == this->y)
-		exit_game(vars, "You where slain by the Farmer!");  */
 }
 
 int	move_player(t_object *this, int sx, int sy, t_vars *vars)
@@ -62,7 +60,7 @@ int	move_player(t_object *this, int sx, int sy, t_vars *vars)
 	ft_printf("PlayerX: %i PlayerY: %i\n", x, y);
 	//ft_printf("EnemyX: %i EnemyY: %i\n", vars->enemy->x, vars->enemy->y);
 	this->moves += 1;
-	ft_printf("%d\n", this->moves);
+	display_counter(vars, 10, 10, this->moves);
 	this->x = x;
 	this->y = y;
 	return (1);

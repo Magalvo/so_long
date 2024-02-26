@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:31:24 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/26 21:00:33 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/26 22:01:20 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int init_window(t_map smapi, t_vars *vars)
 					&vars->canva.endian);
 	vars->wall = load_img("img/char/Grass64.xpm", vars);
 	vars->floor = load_img("img/char/Pavement.xpm", vars);
+	load_digit_images(vars);
 	create_object_all(vars->game, vars);
 	return(1);
 }

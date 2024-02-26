@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:23:32 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/26 19:17:50 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/26 22:22:18 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ struct	s_vars
 	t_object	*enemy;
 	t_object 	*player;
 	t_map		game;
+	t_img		*digit_imgs;
 	t_img		canva;
 	t_img		wall;
 	t_img		floor;
@@ -108,7 +109,8 @@ int			move_player(t_object *this, int sx, int sy, t_vars *vars);
 int			move_enemy(t_object *this, t_vars *vars);
 void		enemy_dir(t_vars *vars);
 t_img		load_img(char *path, t_vars *varg);
-
+void 		display_counter(t_vars *vars, int x, int y, int number);
+void		load_digit_images(t_vars *vars);
 
 //===================CLEANING===================//
 int 		exit_game(t_vars *vars, char *msg);
