@@ -31,12 +31,16 @@ void	paint_enemy(t_vars *vars, t_img *img, int x, int y)
 }
 static void	__render(t_object *this, t_vars *vars)
 {
+	if (vars->player->x == this->x && vars->player->y == this->y)
+	{
+		exit_game(vars, "You where slain by the Farmer!");
+	}
 	if (this->move_counter++ >= this->move_interval)
 	{
 		this->move_counter = 0;
 		if(!move_enemy(this, vars))
 			enemy_dir(vars);
-		printf("DIR: %d", vars->xdirection);
+		//ft_printf("DIR: %d", vars->xdirection);
 	}
 	update_enemy_sprite(&this->imgs[0]);
 	paint_enemy(vars, &this->imgs[0], this->x * 64, this->y * 64);
@@ -50,13 +54,13 @@ int	move_enemy(t_object *this, t_vars *vars)
 
 	dx = 0;
 	dy = 0;
-	if (vars->xdirection == D_UP)
+	if (vars->xdirection == D_UP)         
 		dy = -1;
-	else if (vars->xdirection == D_RIGHT)
+	else if (vars->xdirection == D_RIGHT) 
 		dx = 1;
-	else if (vars->xdirection == D_DOWN)
+	else if (vars->xdirection == D_DOWN)  
 		dy = 1;
-	else if (vars->xdirection == D_LEFT)
+	else if (vars->xdirection == D_LEFT)  
 		dx = -1;
 	newX = this->x + dx;
 	newY = this->y + dy;
@@ -64,6 +68,7 @@ int	move_enemy(t_object *this, t_vars *vars)
 	{ 
 		this->x = newX;
 		this->y = newY;
+		//ft_printf("eX: %i eY: %i\n", newX, newY);
 		return (1); 
 	}
 	return (0); 
@@ -75,19 +80,19 @@ t_object *new_enemy(t_vars *vars, int x, int y)
 
 	enemy = ft_calloc(sizeof(t_object), 1);
 	if (!enemy)
-		exit_game(vars, "error on new player");
+		exit_game(vars, "error, no enemy player");
 	vars->player = enemy;
 	vars->xdirection = 0;
 	enemy->x = x;
 	enemy->y = y;
 	enemy->render = __render;
 	enemy->imgs = ft_calloc(sizeof(t_img),1);
-	enemy->imgs[0] = load_img("img/Enemy/Lion4x4.xpm", vars);
+	enemy->imgs[0] = load_img("img/Enemy/Lion4x42.xpm", vars);
 	enemy->move_counter = 0;
 	enemy->move_interval = 20;
 	enemy->imgs->total_frames = 4;
 	enemy->imgs->curr_frame = 0;
 	enemy->imgs->curr_sprite = 0;
-	printf("playerIn\n");
+	//ft_printf("playerIn\n");
 	return (enemy);
 }

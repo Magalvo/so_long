@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:23:32 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/26 16:10:26 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:03:32 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ struct	s_object
 	int			y;
 	int			move_counter;
 	int			move_interval;
+	int			moves;
 	int			collected;
 	t_img		*imgs;
 	t_object	*next;

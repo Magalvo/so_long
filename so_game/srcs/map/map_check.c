@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:44:47 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/23 16:57:58 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:06:59 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	validate_borders_width(t_vars *vars, t_map *map)
 			exit_game(vars, "Error Validating Borders WIDHT");
 		y++;
 	}
-	ft_printf("Valid Width: %d\n", map->width);
+	//ft_printf("Valid Width: %d\n", map->width);
 	return (1);
 }
 
@@ -56,7 +56,7 @@ int	validate_borders_height(t_vars *vars, t_map *map)
 			exit_game(vars, "Error Validating BOTTOM ROW");
 		x++;
 	}
-	ft_printf("Valid Height: %d\n",  map->height);
+	//ft_printf("Valid Height: %d\n",  map->height);
 }
 
 int	validate_borders(t_vars *vars,t_map *map)
@@ -115,9 +115,9 @@ int	validate_map(t_vars *vars, t_map *map)
 	map->objects_count = collectibles + 2;
 	flood_fill(vars, sy, sx, map);
 	map->cpymap[sy][sx] = 'P';
-	ft_print_map(map->cpymap);
+	//ft_print_map(map->cpymap);
 	if	(map->collectibles_count != collectibles || map->exit_found != 1)
 		exit_game(vars, "The Fox is Trapped OR Can't find all chickens :(");
-	ft_printf("Finish Verify\n");
+	//ft_printf("Finish Verify\n");
 	return (1);
 }

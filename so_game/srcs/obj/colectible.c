@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:20:43 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/26 16:08:05 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:14:25 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void	paint_chicken(t_vars *vars, t_img *img, int x, int y)
 static void __render(t_object *this, t_vars *vars)
 {
 	if (vars->player->x == this->x && vars->player->y == this->y && !this->collected)
+	{
+		ft_printf("YUM! Delicious\n");
 		collect_item(vars, this->x, this->y);
+	}
 	if (!this->collected)
 	{
 		update_chicken_sprite(&this->imgs[0]);
@@ -66,7 +69,7 @@ t_object *new_collectible(t_vars *vars, int x, int y)
 	this->imgs->total_frames = 4;
 	this->imgs->curr_frame = 0;
 	this->imgs->curr_sprite = 0;
-	printf("colectibleIn\n");
+	//ft_printf("colectibleIn\n");
 	return (this);
 }
 

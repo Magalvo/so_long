@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:20:49 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/25 00:37:50 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/26 18:05:55 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static void	__render(t_object *this, t_vars *vars)
 {
 	update_player_sprite(&this->imgs[0]);
 	paint_player(vars, &this->imgs[0], this->x * 64, this->y * 64);
+	/* if(vars->enemy->x == this->x && vars->enemy->y == this->y)
+		exit_game(vars, "You where slain by the Farmer!");  */
 }
 
 int	move_player(t_object *this, int sx, int sy, t_vars *vars)
@@ -54,13 +56,13 @@ int	move_player(t_object *this, int sx, int sy, t_vars *vars)
 
 	x = this->x + sx;
 	y = this->y + sy;
-
-	printf("x: %i y: %i\n", sx, sy);
+	//ft_printf("x: %i y: %i\n", sx, sy);
 	if (vars->game.map[y][x] == '1')
 		return (0);
-	if (vars->game.map[y][x] == 'X')
-		exit_game(vars, "Your where slained by the farmer!");
-	printf("mx: %i my: %i\n", x, y);
+	ft_printf("PlayerX: %i PlayerY: %i\n", x, y);
+	//ft_printf("EnemyX: %i EnemyY: %i\n", vars->enemy->x, vars->enemy->y);
+	this->moves += 1;
+	ft_printf("%d\n", this->moves);
 	this->x = x;
 	this->y = y;
 	return (1);
@@ -83,7 +85,7 @@ t_object *new_player(t_vars *vars, int x, int y)
 	player->imgs->total_frames = 3;
 	player->imgs->curr_frame = 0;
 	player->imgs->curr_sprite = 0;
-	printf("playerIn\n");
+	//printf("playerIn\n");
 	return (player);
 }
 

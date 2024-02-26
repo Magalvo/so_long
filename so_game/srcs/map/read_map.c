@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:01:17 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/21 16:12:02 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:07:05 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void read_map_lines(t_vars *vars, int fd, t_map *smap, int ln_ctd)
 	if (smap->map)
 	{
 		smap->map[ln_ctd] = line;
-		ft_printf("%s", smap->map[ln_ctd]);
+		//ft_printf("%s", smap->map[ln_ctd]);
 	}
 	if (smap->cpymap)
 		smap->cpymap[ln_ctd] = ft_strdup(line);
