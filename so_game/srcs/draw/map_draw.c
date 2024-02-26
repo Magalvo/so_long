@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:31:24 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/26 19:46:56 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/26 21:00:33 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int init_window(t_map smapi, t_vars *vars)
 	vars->canva.img_width = (smapi.width * 64);
 	vars->canva.img_height = (smapi.height * 64);
 	vars->win = mlx_new_window(vars->mlx, vars->canva.img_width , \
-	vars->canva.img_height, "so_long");
+	vars->canva.img_height, "Fantastic Mister Fox");
 	vars->canva.img = mlx_new_image(vars->mlx,  vars->canva.img_width , \
 	vars->canva.img_height);
 	vars->canva.addr = mlx_get_data_addr(vars->canva.img,

@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:44:47 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/26 20:55:31 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/26 21:08:31 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ int	validate_borders(t_vars *vars,t_map *map)
  		(validate_borders_height(vars, &vars->game));
 }
 
-int		switch_char(t_vars *vars, t_map *smap, int *players, int *exits, int *collectibles, \
- 						int *enemy, int *sx, int *sy)
+int		switch_char(t_vars *vars, t_map *smap, int *players, int *exits, int *collectibles, int *sx, int *sy)
 {
 	char	tile;
 	int		y;
@@ -85,12 +84,12 @@ int		switch_char(t_vars *vars, t_map *smap, int *players, int *exits, int *colle
 				*sx = x;
 				(*players)++;
 			}
-			if (tile == 'E')
+			else if (tile == 'E')
 				(*exits)++;
-			if (tile == 'C')
+			else if (tile == 'C')
 				(*collectibles)++;
-			if (tile == 'X')
-				(*enemy)++;
+			else if (!(tile=='X' || tile=='0' || tile=='1'))
+				exit_game(vars, "Invalid Character");	
 		}
 	}
 }
@@ -99,7 +98,6 @@ int	validate_map(t_vars *vars, t_map *map)
 {
 	int	players;
 	int	exits;
-	int enemy;
 	int	collectibles;
 	int	sx;
 	int	sy;
@@ -108,11 +106,10 @@ int	validate_map(t_vars *vars, t_map *map)
 	sy = 0;
 	collectibles = 0;
 	exits = 0;
-	enemy = 0;
 	players = 0;
 	if (!validate_borders(vars,map))
 		exit_game(vars, "Error on map validation(map_check.c)");
- 	switch_char(vars, map, &players, &exits, &collectibles, &enemy, &sx, &sy);
+ 	switch_char(vars, map, &players, &exits, &collectibles, &sx, &sy);
 	if	(players != 1 || exits != 1 || collectibles <= 0)
 		exit_game(vars, "Error Validating Items");
 	map->objects_count = collectibles + 2;
