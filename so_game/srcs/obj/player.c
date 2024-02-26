@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:20:49 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/26 22:21:17 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/26 22:56:39 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int	move_player(t_object *this, int sx, int sy, t_vars *vars)
 	ft_printf("PlayerX: %i PlayerY: %i\n", x, y);
 	//ft_printf("EnemyX: %i EnemyY: %i\n", vars->enemy->x, vars->enemy->y);
 	this->moves += 1;
-	display_counter(vars, 10, 10, this->moves);
+	ft_printf("%i", this->moves);
+	//display_counter(vars, 10, 10, this->moves);
 	this->x = x;
 	this->y = y;
 	return (1);
