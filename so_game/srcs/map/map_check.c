@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:44:47 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/26 17:06:59 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/26 20:55:31 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,21 @@ int	validate_borders(t_vars *vars,t_map *map)
  		(validate_borders_height(vars, &vars->game));
 }
 
-int		switch_char(t_vars *vars, t_map *smap, int *players, int *exits, int *collectibles, int *sx, int *sy)
+int		switch_char(t_vars *vars, t_map *smap, int *players, int *exits, int *collectibles, \
+ 						int *enemy, int *sx, int *sy)
 {
 	char	tile;
 	int		y;
 	int		x;
 
-	y = 0;
-	while (y < smap->height)
+	y = -1;
+	while (++y < smap->height)
 	{
-		x=0;
-		while (x < smap->width)
+		x=-1;
+		while (++x < smap->width)
 		{
 			tile = smap->map[y][x];
-			if (tile == 'P' && (*players) == 0)
+			if (tile == 'P' )
 			{
 				*sy = y;
 				*sx = x;
@@ -88,9 +89,9 @@ int		switch_char(t_vars *vars, t_map *smap, int *players, int *exits, int *colle
 				(*exits)++;
 			if (tile == 'C')
 				(*collectibles)++;
-			x++;
+			if (tile == 'X')
+				(*enemy)++;
 		}
-		y++;
 	}
 }
 
@@ -98,6 +99,7 @@ int	validate_map(t_vars *vars, t_map *map)
 {
 	int	players;
 	int	exits;
+	int enemy;
 	int	collectibles;
 	int	sx;
 	int	sy;
@@ -106,18 +108,19 @@ int	validate_map(t_vars *vars, t_map *map)
 	sy = 0;
 	collectibles = 0;
 	exits = 0;
+	enemy = 0;
 	players = 0;
 	if (!validate_borders(vars,map))
 		exit_game(vars, "Error on map validation(map_check.c)");
- 	switch_char(vars, map, &players, &exits, &collectibles, &sx, &sy);
+ 	switch_char(vars, map, &players, &exits, &collectibles, &enemy, &sx, &sy);
 	if	(players != 1 || exits != 1 || collectibles <= 0)
 		exit_game(vars, "Error Validating Items");
 	map->objects_count = collectibles + 2;
 	flood_fill(vars, sy, sx, map);
 	map->cpymap[sy][sx] = 'P';
-	//ft_print_map(map->cpymap);
+	ft_print_map(map->cpymap);
 	if	(map->collectibles_count != collectibles || map->exit_found != 1)
 		exit_game(vars, "The Fox is Trapped OR Can't find all chickens :(");
-	//ft_printf("Finish Verify\n");
+	ft_printf("ColectCount: %i\n", map->collectibles_count);
 	return (1);
 }

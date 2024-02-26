@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 12:06:45 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/21 16:14:55 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:41:55 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	flood_fill(t_vars *vars, int sy, int sx, t_map *smap)
 {
- 	if (smap->cpymap[sy][sx] == '1' || smap->cpymap[sy][sx] == '=')
+ 	if (smap->cpymap[sy][sx] == '1' || smap->cpymap[sy][sx] == '=' \
+		|| smap->cpymap[sy][sx] == 'X')
 		return ;
 	if (smap->cpymap[sy][sx] == 'C')
 		smap->collectibles_count++;
