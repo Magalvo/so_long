@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:20:35 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/21 15:06:45 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:11:09 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 static void __render(t_object *this, t_vars *vars)
 {
-	paintcanva(vars, &this->imgs[0], this->x * 64, this->y * 64);
+	if(vars->game.collectibles_count == 0)
+		paintcanva(vars, &this->imgs[0], this->x * 64, this->y * 64);
 }
 
 t_object *new_exit(t_vars *vars, int x, int y)

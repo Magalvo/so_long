@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:23:32 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/26 00:57:08 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:10:26 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ struct	s_object
 	void		(*render)(t_object *this, t_vars *vars);
 	int			x;
 	int			y;
+	int			move_counter;
+	int			move_interval;
+	int			collected;
 	t_img		*imgs;
 	t_object	*next;
 };
@@ -97,10 +100,12 @@ void 		create_object_all(t_map smapi, t_vars *vars);
 void		paintcanva(t_vars *varg, t_img *img, int sx, int sy);
 void		paint_canvaw(t_vars *varg, t_img *img, int sx, int sy);
 void		update_sprite(t_img *img);
+void		collect_item(t_vars *vars, int x, int y);
 int 		draw_map(t_vars *vars);
 int			init_window(t_map smapi, t_vars *vars);
 int			move_player(t_object *this, int sx, int sy, t_vars *vars);
 int			move_enemy(t_object *this, t_vars *vars);
+void		enemy_dir(t_vars *vars);
 t_img		load_img(char *path, t_vars *varg);
 
 
