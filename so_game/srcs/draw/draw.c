@@ -6,10 +6,9 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:11:17 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/23 15:06:15 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:06:57 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../headers/so_long.h"
 
@@ -25,7 +24,7 @@ void	paintcanva(t_vars *varg, t_img *img, int sx, int sy)
 		while (x < img->img_width)
 		{
 			my_mlx_pixel_put(&varg->canva, sx + x, sy + y, my_mlx_pixel_get(img,
-						x, y));
+					x, y));
 			x++;
 		}
 		y++;
@@ -49,14 +48,12 @@ void	paint_canvaw(t_vars *varg, t_img *img, int sx, int sy)
 		while (x < frame_width)
 		{
 			color = my_mlx_pixel_get(img, frame_x_offset + x, y);
-			my_mlx_pixel_put(&varg->canva, sx + x, sy + y,
-					color);
+			my_mlx_pixel_put(&varg->canva, sx + x, sy + y, color);
 			++x;
 		}
 		++y;
 	}
 }
-
 
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
@@ -76,4 +73,12 @@ int	my_mlx_pixel_get(t_img *data, int x, int y)
 	return (*(unsigned int *)dst);
 }
 
+void	render_all(t_vars *vars)
+{
+	static long long	time;
 
+	while (check_time(&time) == False)
+		;
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->canva.img, 0, 0);
+	display_counter(vars, 10, 10, vars->player->moves);
+}

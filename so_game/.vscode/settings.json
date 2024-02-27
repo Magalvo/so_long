@@ -3,6 +3,7 @@
 		"*.jsx": "javascriptreact",
 		"macros.h": "c",
 		"so_long.h": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"xutil.h": "c"
 	}
 }

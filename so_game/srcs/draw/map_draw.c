@@ -6,16 +6,19 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:31:24 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/26 22:55:53 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:07:10 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/so_long.h"
 
+void		render_all(t_vars *vars);
 
-t_object *create_object(t_vars *vars, char map_char, int x, int y) {
-	t_object *tmp = NULL;
+t_object	*create_object(t_vars *vars, char map_char, int x, int y)
+{
+	t_object	*tmp;
 
+	tmp = NULL;
 	if (map_char == 'P')
 		tmp = new_player(vars, x, y);
 	else if (map_char == 'C')
@@ -24,20 +27,19 @@ t_object *create_object(t_vars *vars, char map_char, int x, int y) {
 		tmp = new_exit(vars, x, y);
 	else if (map_char == 'X')
 		tmp = new_enemy(vars, x, y);
-
-	return tmp;
+	return (tmp);
 }
 
-void process_row(t_map smapi, t_vars *vars, t_object **end, int y)
+void	process_row(t_map smapi, t_vars *vars, t_object **end, int y)
 {
-	int 		x;
+	int			x;
 	t_object	*tmp;
 
 	x = 0;
 	while (x < smapi.width)
 	{
 		if (smapi.map[y][x] == '1' && ++x)
-			continue;
+			continue ;
 		tmp = NULL;
 		tmp = create_object(vars, smapi.map[y][x], x, y);
 		if (tmp)
@@ -53,10 +55,10 @@ void process_row(t_map smapi, t_vars *vars, t_object **end, int y)
 	}
 }
 
-void create_object_all(t_map smapi, t_vars *vars)
+void	create_object_all(t_map smapi, t_vars *vars)
 {
-	int y;
-	t_object *end;
+	int			y;
+	t_object	*end;
 
 	y = 0;
 	end = NULL;
@@ -67,12 +69,11 @@ void create_object_all(t_map smapi, t_vars *vars)
 	}
 }
 
-
-int draw_map(t_vars *vars)
+int	draw_map(t_vars *vars)
 {
-	int x;
-	int y;
-	t_object *tmp;
+	int			x;
+	int			y;
+	t_object	*tmp;
 
 	y = -1;
 	while (++y < vars->game.height)
@@ -92,29 +93,27 @@ int draw_map(t_vars *vars)
 		tmp->render(tmp, vars);
 		tmp = tmp->next;
 	}
-	usleep(100000);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->canva.img, 0, 0);
+	render_all(vars);
 	return (0);
 }
 
-int init_window(t_map smapi, t_vars *vars)
+int	init_window(t_map smapi, t_vars *vars)
 {
 	vars->mlx = mlx_init();
 	if (!vars->mlx)
 		return (0);
 	vars->canva.img_width = (smapi.width * 64);
 	vars->canva.img_height = (smapi.height * 64);
-	vars->win = mlx_new_window(vars->mlx, vars->canva.img_width , \
-	vars->canva.img_height, "Fantastic Mister Fox");
-	vars->canva.img = mlx_new_image(vars->mlx,  vars->canva.img_width , \
-	vars->canva.img_height);
+	vars->win = mlx_new_window(vars->mlx, vars->canva.img_width,
+			vars->canva.img_height, "Fantastic Mister Fox");
+	vars->canva.img = mlx_new_image(vars->mlx, vars->canva.img_width,
+			vars->canva.img_height);
 	vars->canva.addr = mlx_get_data_addr(vars->canva.img,
-					&vars->canva.bits_per_pixel,
-					&vars->canva.line_length,
-					&vars->canva.endian);
+			&vars->canva.bits_per_pixel,
+			&vars->canva.line_length,
+			&vars->canva.endian);
 	vars->wall = load_img("img/char/Grass64.xpm", vars);
 	vars->floor = load_img("img/char/Pavement.xpm", vars);
-	//load_digit_images(vars);
 	create_object_all(vars->game, vars);
-	return(1);
+	return (1);
 }

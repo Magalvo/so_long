@@ -14,7 +14,7 @@
 
 void	flood_fill(t_vars *vars, int sy, int sx, t_map *smap)
 {
- 	if (smap->cpymap[sy][sx] == '1' || smap->cpymap[sy][sx] == '=' \
+	if (smap->cpymap[sy][sx] == '1' || smap->cpymap[sy][sx] == '='
 		|| smap->cpymap[sy][sx] == 'X')
 		return ;
 	if (smap->cpymap[sy][sx] == 'C')
@@ -28,16 +28,14 @@ void	flood_fill(t_vars *vars, int sy, int sx, t_map *smap)
 	flood_fill(vars, sy, sx + 1, smap);
 }
 
-
 void	ft_print_map(char **smap)
 {
-	int i;
+	int	i;
 
-	i=0;
+	i = 0;
 	while (smap[i])
 	{
 		ft_printf("%s", smap[i]);
 		i++;
 	}
 }
-

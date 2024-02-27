@@ -1,16 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cleaning.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/27 10:37:22 by dde-maga          #+#    #+#             */
+/*   Updated: 2024/02/27 17:29:24 by dde-maga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../headers/so_long.h"
 
-
-void free_objects(t_object *head, t_vars *vars)
+void	free_objects(t_object *head, t_vars *vars)
 {
-	t_object *tmp;
+	t_object	*tmp;
 
 	while (head != NULL)
 	{
 		tmp = head;
 		head = head->next;
-		if (tmp->imgs) {
+		if (tmp->imgs)
+		{
 			mlx_destroy_image(vars->mlx, tmp->imgs[0].img);
 			free(tmp->imgs);
 		}
@@ -20,13 +31,22 @@ void free_objects(t_object *head, t_vars *vars)
 
 void	free_map(t_map *smap)
 {
-	if (smap->map != NULL) {
+	int	i;
+	int	x;
 
-		for (int i = 0; smap->map[i] != NULL; i++) {
+	if (smap->map != NULL)
+	{
+		i = 0;
+		while (smap->map[i] != NULL)
+		{
 			free(smap->map[i]);
+			i++;
 		}
-		for (int x = 0; smap->cpymap[x] != NULL; x++) {
+		x = 0;
+		while (smap->cpymap[x] != NULL)
+		{
 			free(smap->cpymap[x]);
+			x++;
 		}
 		free(smap->map);
 		free(smap->cpymap);
@@ -35,7 +55,7 @@ void	free_map(t_map *smap)
 	}
 }
 
-int exit_game(t_vars *vars, char *msg)
+int	exit_game(t_vars *vars, char *msg)
 {
 	ft_printf("%s\n", msg);
 	free_objects(vars->objects, vars);
@@ -55,5 +75,5 @@ int exit_game(t_vars *vars, char *msg)
 int	close_window(t_vars *vars)
 {
 	exit_game(vars, "Game Closed, shutting down...\n");
-	return(1);
+	return (1);
 }

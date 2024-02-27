@@ -1,39 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   counter.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/27 10:36:36 by dde-maga          #+#    #+#             */
+/*   Updated: 2024/02/27 11:56:12 by dde-maga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../headers/so_long.h"
 
-void    load_digit_images(t_vars *vars) 
+void	display_counter(t_vars *vars, int x, int y, int number)
 {
-    char *digit_paths[NUM_DIGITS] = {
-        "img/numbers/0.xpm", "img/numbers/1.xpm", "img/numbers/2.xpm",
-        "img/numbers/3.xpm", "img/numbers/4.xpm", "img/numbers/5.xpm",
-        "img/numbers/6.xpm", "img/numbers/7.xpm", "img/numbers/8.xpm",
-        "img/numbers/9.xpm"
-    };
+	char	*num_str;
 
-    
-    vars->digit_imgs = malloc(NUM_DIGITS * sizeof(t_img));
-    if (!vars->digit_imgs) 
-    {
-        exit_game(vars, "Failed to allocate memory for digit images");
-    }
-    for (int i = 0; i < NUM_DIGITS; i++) 
-    {
-        vars->digit_imgs[i] = load_img(digit_paths[i], vars);
-    }
+	num_str = ft_itoa(number);
+	if (!num_str)
+		exit_game(vars, "Failed counter conv");
+	mlx_string_put(vars->mlx, vars->win, x, y, 0xFFFFFF, num_str);
+	free(num_str);
 }
 
-void    display_counter(t_vars *vars, int x, int y, int number) 
+bool	check_time(long long *last_time)
 {
-    char num_str[12]; 
-    sprintf(num_str, "%d", number);
+	struct timeval	tv;
+	long long		current_time;
 
-    int digit_x = x;
-    for (int i = 0; num_str[i] != '\0'; i++) 
-    {
-        int digit = num_str[i] - '0'; 
-        if (digit >= 0 && digit <= 9) 
-        {
-            mlx_put_image_to_window(vars->mlx, vars->win, vars->digit_imgs[digit].img, digit_x, y);
-            digit_x += vars->digit_imgs[digit].img_width; 
-        }
-    }
+	gettimeofday(&tv, NULL);
+	current_time = tv.tv_sec * 1000000 + tv.tv_usec;
+	if (current_time - *last_time >= FRAME_TIME)
+	{
+		*last_time = current_time;
+		return (true);
+	}
+	else
+		return (false);
 }

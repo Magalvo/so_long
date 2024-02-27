@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:20:43 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/26 17:14:25 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:30:09 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	update_chicken_sprite(t_img *img)
 void	paint_chicken(t_vars *vars, t_img *img, int x, int y)
 {
 	int	frame_x_offset;
-	int frame_y_offset;
+	int	frame_y_offset;
 	int	sy;
 	int	sx;
 	int	color;
@@ -30,7 +30,7 @@ void	paint_chicken(t_vars *vars, t_img *img, int x, int y)
 	sy = 0;
 	while (sy < HEIGHT)
 	{
-		sx= 0;
+		sx = 0;
 		while (sx < WIDTH)
 		{
 			color = my_mlx_pixel_get(img, frame_x_offset + sx, sy);
@@ -40,9 +40,11 @@ void	paint_chicken(t_vars *vars, t_img *img, int x, int y)
 		sy++;
 	}
 }
-static void __render(t_object *this, t_vars *vars)
+
+static void	__render(t_object *this, t_vars *vars)
 {
-	if (vars->player->x == this->x && vars->player->y == this->y && !this->collected)
+	if (vars->player->x == this->x && vars->player->y == this->y
+		&& !this->collected)
 	{
 		ft_printf("YUM! Delicious\n");
 		collect_item(vars, this->x, this->y);
@@ -54,9 +56,9 @@ static void __render(t_object *this, t_vars *vars)
 	}
 }
 
-t_object *new_collectible(t_vars *vars, int x, int y)
+t_object	*new_collectible(t_vars *vars, int x, int y)
 {
-	t_object *this;
+	t_object	*this;
 
 	this = ft_calloc(sizeof(t_object), 1);
 	if (!this)
@@ -69,8 +71,5 @@ t_object *new_collectible(t_vars *vars, int x, int y)
 	this->imgs->total_frames = 4;
 	this->imgs->curr_frame = 0;
 	this->imgs->curr_sprite = 0;
-	//ft_printf("colectibleIn\n");
 	return (this);
 }
-
-

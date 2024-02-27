@@ -6,7 +6,7 @@ SRC_DRAW = draw.c images.c map_draw.c sprites.c counter.c
 SRC_MAPS = flood_fill.c map_check.c read_map.c
 SRC_OBJS = player.c colectible.c exit.c cleaning.c enemy.c logic.c
 SRC_LIBFT = ft_putstr_fd.c ft_strlen.c ft_putchar_fd.c ft_memset.c \
-			ft_calloc.c ft_strdup.c
+			ft_calloc.c ft_strdup.c ft_itoa.c
 
 SRC =	$(addprefix ./srcs/lib/, $(SRC_LIBFT)) \
 		$(addprefix ./srcs/custom/get_next_line/, $(SRC_GNL)) \
@@ -18,7 +18,7 @@ SRC =	$(addprefix ./srcs/lib/, $(SRC_LIBFT)) \
 
 SRCOBJ = obj/
 CC = gcc
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -g3 -fsanitize=address#-Wall -Wextra -Werror
 LIBFLAGS = -lXext -lX11
 LIB = minilibx-linux/libmlx_Linux.a
 OBJ = $(addprefix $(SRCOBJ), $(SRC:./srcs/%.c=%.o))
@@ -27,7 +27,7 @@ OBJ = $(addprefix $(SRCOBJ), $(SRC:./srcs/%.c=%.o))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@${CC} ${CFLAGS} -g3 main.c ${OBJ} ${LIB} ${LIBFLAGS} -o $(NAME)
+	@${CC} ${CFLAGS} main.c ${OBJ} ${LIB} ${LIBFLAGS} -o $(NAME)
 
 $(SRCOBJ)%.o: srcs/%.c
 	@mkdir -p $(SRCOBJ)

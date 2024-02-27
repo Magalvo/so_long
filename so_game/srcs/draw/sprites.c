@@ -10,13 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "../../headers/so_long.h"
 
 void	update_sprite(t_img *img)
 {
 	img->curr_frame = (img->curr_frame + 1) % img->total_frames;
 }
-
-
