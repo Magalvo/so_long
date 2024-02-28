@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:20:43 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/27 17:30:09 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:40:44 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,11 @@ void	update_chicken_sprite(t_img *img)
 void	paint_chicken(t_vars *vars, t_img *img, int x, int y)
 {
 	int	frame_x_offset;
-	int	frame_y_offset;
 	int	sy;
 	int	sx;
 	int	color;
 
 	frame_x_offset = (img->curr_frame % img->total_frames) * WIDTH;
-	frame_y_offset = HEIGHT;
 	sy = 0;
 	while (sy < HEIGHT)
 	{
@@ -44,12 +42,11 @@ void	paint_chicken(t_vars *vars, t_img *img, int x, int y)
 static void	__render(t_object *this, t_vars *vars)
 {
 	if (vars->player->x == this->x && vars->player->y == this->y
-		&& !this->collected)
+		&& this->collected == 0)
 	{
-		ft_printf("YUM! Delicious\n");
 		collect_item(vars, this->x, this->y);
 	}
-	if (!this->collected)
+	if (this->collected == 0)
 	{
 		update_chicken_sprite(&this->imgs[0]);
 		paint_chicken(vars, &this->imgs[0], this->x * 64, this->y * 64);

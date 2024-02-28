@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:37:13 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/27 18:18:37 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:30:34 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,16 @@ static void	__render(t_object *this, t_vars *vars)
 {
 	if (vars->player->x == this->x && vars->player->y == this->y)
 	{
-		exit_game(vars, "You where slain by the Farmer!");
+		exit_game(vars, "\rYou where slain by the Farmer!\n");
 	}
 	if (this->move_counter++ >= this->move_interval)
 	{
 		this->move_counter = 0;
 		enemy_dir(vars);
-		move_enemy(this, vars);
+		if (!chk_loc (vars, this->x, this->collected))
+		{
+			move_enemy(this, vars);
+		}
 	}
 	update_enemy_sprite(&this->imgs[0]);
 	paint_enemy(vars, &this->imgs[0], this->x * 64, this->y * 64);
@@ -77,14 +80,13 @@ int	move_enemy(t_object *this, t_vars *vars)
 		dx = -1;
 	new_x = this->x + dx;
 	new_y = this->y + dy;
-	if (vars->game.map[new_y][new_x] != '1'
-		&& vars->game.map[new_y][new_x] != 'C')
+	if (vars->game.map[new_y][new_x] == 48
+		&& !chk_loc(vars, new_x, new_y))
 	{
 		this->x = new_x;
 		this->y = new_y;
-		return (1);
 	}
-	return (0);
+	return (1);
 }
 
 t_object	*new_enemy(t_vars *vars, int x, int y)
@@ -94,10 +96,11 @@ t_object	*new_enemy(t_vars *vars, int x, int y)
 	enemy = ft_calloc(sizeof(t_object), 1);
 	if (!enemy)
 		exit_game(vars, "error, no enemy player");
-	vars->player = enemy;
+	vars->enemy = enemy;
 	vars->xdirection = 0;
 	enemy->x = x;
 	enemy->y = y;
+	enemy->collected = 1;
 	enemy->render = __render;
 	enemy->imgs = ft_calloc(sizeof(t_img), 1);
 	enemy->imgs[0] = load_img("img/Enemy/Lion4x42.xpm", vars);

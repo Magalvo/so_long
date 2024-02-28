@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:44:47 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/27 18:38:40 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:43:18 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	validate_borders_width(t_vars *vars, t_map *map)
 {
-	size_t	x;
-	size_t	y;
+	int	x;
+	int	y;
 
 	map->width = -1;
 	y = 0;
@@ -37,8 +37,8 @@ int	validate_borders_width(t_vars *vars, t_map *map)
 
 int	validate_borders_height(t_vars *vars, t_map *map)
 {
-	size_t	x;
-	size_t	y;
+	int	x;
+	int	y;
 
 	x = 0;
 	y = map->height - 1;
@@ -55,15 +55,16 @@ int	validate_borders_height(t_vars *vars, t_map *map)
 			exit_game(vars, "Error Validating BOTTOM ROW");
 		x++;
 	}
+	return (1);
 }
 
-int	validate_borders(t_vars *vars, t_map *map)
+int	validate_borders(t_vars *vars)
 {
 	return ((validate_borders_width(vars, &vars->game)) && \
 			(validate_borders_height(vars, &vars->game)));
 }
 
-int	switch_char(t_vars *vars, t_val *temp)
+void	switch_char(t_vars *vars, t_val *temp)
 {
 	char	tile;
 	int		y;
@@ -94,10 +95,7 @@ int	switch_char(t_vars *vars, t_val *temp)
 
 int	validate_map(t_vars *vars, t_map *map)
 {
-	ft_printf("valPlay: %i\n", vars->val.players);
-	ft_printf("valExits: %i\n", vars->val.exits);
-	ft_printf("valCollect: %i\n", vars->val.collectibles);
-	if (!validate_borders(vars, map))
+	if (!validate_borders(vars))
 		exit_game(vars, "Error on map validation(map_check.c)");
 	switch_char(vars, &vars->val);
 	if (vars->val.players != 1 || vars->val.exits != 1

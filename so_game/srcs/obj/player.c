@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:20:49 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/27 17:52:06 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:18:59 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	move_player(t_object *this, int sx, int sy, t_vars *vars)
 	y = this->y + sy;
 	if (vars->game.map[y][x] == '1')
 		return (0);
-	vars->game.counter += 1;
 	this->moves += 1;
 	ft_printf("\rMoves: %i\t", this->moves);
 	this->x = x;
@@ -76,11 +75,11 @@ t_object	*new_player(t_vars *vars, int x, int y)
 	vars->pdirection = 0;
 	player->x = x;
 	player->y = y;
+	player->collected = 1;
 	player->render = __render;
 	player->imgs = ft_calloc(sizeof(t_img), 1);
 	player->imgs[0] = load_img("img/Player/FoxAllrr.xpm", vars);
 	player->imgs->total_frames = 3;
-	player->moves = -1;
 	player->imgs->curr_frame = 0;
 	player->imgs->curr_sprite = 0;
 	return (player);

@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:20:35 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/27 18:40:32 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:22:13 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	__render(t_object *this, t_vars *vars)
 	{
 		paintcanva(vars, &this->imgs[0], this->x * 64, this->y * 64);
 		if (vars->player->x == this->x && vars->player->y == this->y)
-			exit_game(vars, "Congratulations Mr.Fox, you Win!\n");
+			exit_game(vars, "\rCongratulations Mr.Fox, You Win!\n");
 	}
 }
 

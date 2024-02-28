@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:23:32 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/27 17:34:25 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:14:51 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,11 @@ int						my_mlx_pixel_get(t_img *data, int x, int y);
 //===================CHECKERS===================//
 void					flood_fill(t_vars *vars, int sx, int sy, t_map *smap);
 void					create_object_all(t_map smapi, t_vars *vars);
+void					ft_print_map(char **smap);
 int						name_check(t_vars *vars, char *pathname);
 int						mapping(t_vars *vars, char *map);
 int						validate_map(t_vars *vars, t_map *smap);
+int						chk_loc(t_vars *vars, int x, int y);
 
 //===================DRAW======================//
 void					paintcanva(t_vars *varg, t_img *img, int sx, int sy);

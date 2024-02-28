@@ -18,7 +18,7 @@ SRC =	$(addprefix ./srcs/lib/, $(SRC_LIBFT)) \
 
 SRCOBJ = obj/
 CC = gcc
-CFLAGS = -g3 -fsanitize=address#-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 LIBFLAGS = -lXext -lX11
 LIB = minilibx-linux/libmlx_Linux.a
 OBJ = $(addprefix $(SRCOBJ), $(SRC:./srcs/%.c=%.o))
@@ -27,7 +27,7 @@ OBJ = $(addprefix $(SRCOBJ), $(SRC:./srcs/%.c=%.o))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@${CC} ${CFLAGS} main.c ${OBJ} ${LIB} ${LIBFLAGS} -o $(NAME)
+	@${CC} ${CFLAGS} -g3 main.c ${OBJ} ${LIB} ${LIBFLAGS} -o $(NAME)
 
 $(SRCOBJ)%.o: srcs/%.c
 	@mkdir -p $(SRCOBJ)

@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 10:30:35 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/27 18:36:07 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:41:27 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,41 @@
 
 int	pick_dir(int key, t_vars *vars)
 {
-	if (key == KEY_W || key == KEY_UP)
+	if (key == KEY_W)
 		vars->pdirection = D_UP;
-	else if (key == KEY_A || key == KEY_LEFT)
+	else if (key == KEY_A)
 		vars->pdirection = D_LEFT;
-	else if (key == KEY_S || key == KEY_DOWN)
+	else if (key == KEY_S)
 		vars->pdirection = D_DOWN;
-	else if (key == KEY_D || key == KEY_RIGHT)
+	else if (key == KEY_D)
 		vars->pdirection = D_RIGHT;
 	return (0);
 }
+
 void	enemy_dir(t_vars *vars)
 {
-	int i;
+	int	i;
 
 	i = rand() % 4;
-    vars->xdirection = i;
+	vars->xdirection = i;
 }
+
 int	key_hook(int key, t_vars *vars)
 {
-	static int count;
-
-	count = 0;
-    if (key == XK_Escape)
-        exit_game(vars, "The %d key (ESC) has been pressed");
+	if (key == XK_Escape)
+		exit_game(vars, "The %d key (ESC) has been pressed");
 	else if (key == 17)
 		exit_game(vars, "The %d key (ESC) has been pressed");
-
 	pick_dir(key, vars);
-	move_player(vars->player, (key == XK_d) - (key == XK_a), \
-	(key == XK_s) - (key == XK_w), vars);
-
-    return (0);
+	if (key == XK_d || key == XK_a || key == XK_s || key == XK_w)
+	{
+		move_player(vars->player, (key == XK_d) - (key == XK_a), \
+			(key == XK_s) - (key == XK_w), vars);
+	}
+	return (0);
 }
 
-void	ft_print_banner()
+void	ft_print_banner(void)
 {
 	ft_printf("-----------------------------------");
 	ft_printf("---------------------------------------\n");
@@ -67,9 +67,10 @@ void	ft_print_banner()
 	ft_printf("------------------------------------");
 	ft_printf("--------------------------------------\n\n");
 }
-int main(int argc, char **argv)
+
+int	main(int argc, char **argv)
 {
-	static t_vars vars;
+	static t_vars	vars;
 
 	if (argc != 2)
 		ft_printf("The correct format is( ./program_name map_name.ber )\n");
@@ -88,5 +89,3 @@ int main(int argc, char **argv)
 	}
 	return (0);
 }
-
-
