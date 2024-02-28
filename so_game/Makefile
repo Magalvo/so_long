@@ -20,13 +20,17 @@ SRCOBJ = obj/
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 LIBFLAGS = -lXext -lX11
-LIB = minilibx-linux/libmlx_Linux.a
+LIB_DIR = ./minilibx-linux
+LIB = $(LIB_DIR)/libmlx_Linux.a
 OBJ = $(addprefix $(SRCOBJ), $(SRC:./srcs/%.c=%.o))
 
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(LIB):
+		@$(MAKE) -C $(LIB_DIR) --no-print-directory
+
+$(NAME): $(LIB) $(OBJ)
 	@${CC} ${CFLAGS} -g3 main.c ${OBJ} ${LIB} ${LIBFLAGS} -o $(NAME)
 
 $(SRCOBJ)%.o: srcs/%.c
@@ -36,9 +40,11 @@ $(SRCOBJ)%.o: srcs/%.c
 
 clean:
 	@rm -rf $(SRCOBJ)
+	$(MAKE) -C $(LIB_DIR) clean --no-print-directory
 
 fclean: clean
 	@rm -rf $(NAME)
+	$(MAKE) -C $(LIB_DIR) clean --no-print-directory
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: dde-maga <dde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:20:35 by dde-maga          #+#    #+#             */
-/*   Updated: 2024/02/28 14:22:13 by dde-maga         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:50:31 by dde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ t_object	*new_exit(t_vars *vars, int x, int y)
 	exit->y = y;
 	exit->render = __render;
 	exit->imgs = ft_calloc(1, sizeof(t_img));
-	exit->imgs[0] = load_img("img/char/hole.xpm", vars);
+	exit->imgs[0] = load_img("img/mapi/hole.xpm", vars);
 	return (exit);
 }
