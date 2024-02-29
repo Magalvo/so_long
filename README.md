@@ -29,3 +29,32 @@ Clone the repository to your local machine:
 ```bash
 git clone https://github.com/Magalvo/so_long.git
 cd so_long
+```
+Compile the game using the Makefile (assuming GNU Make is installed):
+
+```bash
+make
+```
+### Running the Game
+
+After compiling, you can run the game by executing:
+
+```bash
+./so_long [path_to_map_file]
+```
+Replace [path_to_map_file] with the path to a valid game map file. 🗺️
+
+### Contributing
+
+Contributions to so_long are welcome! Whether it's feature improvements, bug reports, or new levels, your input is appreciated. Please follow the standard GitHub pull request process to submit your contributions. 🤝
+
+## License
+
+This project is open source and available under the MIT License. 📄
+
+### Acknowledgments
+
+- Thanks to anyone whose code was used 🙏
+- Inspiration 💡
+- etc.
+
