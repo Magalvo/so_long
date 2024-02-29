@@ -31,7 +31,7 @@ int	name_check(t_vars *vars, char *pathname)
 		j += 1;
 	if (pathname[i - 4] == '.')
 		j += 1;
-	if (j == 0)
+	if (j != 4)
 		exit_game(vars, "Invalid Map Format(sec check)");
 	return (j);
 }
