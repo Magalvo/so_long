@@ -48,7 +48,7 @@ Replace [path_to_map_file] with the path to a valid game map file. 🗺️
 
 Contributions to so_long are welcome! Whether it's feature improvements, bug reports, or new levels, your input is appreciated. Please follow the standard GitHub pull request process to submit your contributions. 🤝
 
-## License
+### License
 
 This project is open source and available under the MIT License. 📄
 
